@@ -37,7 +37,6 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\Shape.cs" />
     <Compile Include="Infrastructure\ICanvas.cs" />
     <Compile Include="Domain\IShape.cs" />
     <Compile Include="Infrastructure\PointExtensions.cs" />
