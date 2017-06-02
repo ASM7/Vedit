@@ -34,8 +34,14 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Shape.cs" />
+    <Compile Include="Infrastructure\ICanvas.cs" />
+    <Compile Include="Domain\IShape.cs" />
+    <Compile Include="Infrastructure\PointExtensions.cs" />
+    <Compile Include="Infrastructure\Vector.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -44,8 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Application\" />
-    <Folder Include="Domain\" />
-    <Folder Include="Infrastructure\" />
     <Folder Include="UI\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
