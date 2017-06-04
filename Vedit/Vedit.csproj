@@ -42,6 +42,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+
     <Compile Include="Infrastructure\Canvas.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -52,6 +53,7 @@
     <Compile Include="UI\IClient.cs" />
     <Compile Include="App\Editor.cs" />
     <Compile Include="App\IEditor.cs" />
+
     <Compile Include="Domain\Ellipse.cs" />
     <Compile Include="Domain\Segment.cs" />
     <Compile Include="Infrastructure\ICanvas.cs" />
@@ -66,7 +68,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 
