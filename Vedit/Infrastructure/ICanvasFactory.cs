@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vedit.Application
+namespace Vedit.Infrastructure
 {
-    interface IApplication
+    interface ICanvasFactory
     {
+        ICanvas CreateCanvas();
     }
 }
