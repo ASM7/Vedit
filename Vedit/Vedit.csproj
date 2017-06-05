@@ -43,12 +43,17 @@
   <ItemGroup>
     <Compile Include="Application\Application.cs" />
     <Compile Include="Application\IApplication.cs" />
+    <Compile Include="Domain\BinDocumentFormatter.cs" />
+    <Compile Include="Domain\Document.cs" />
     <Compile Include="Infrastructure\Extension.cs" />
     <Compile Include="Domain\Ellipse.cs" />
     <Compile Include="Domain\Segment.cs" />
     <Compile Include="Infrastructure\ICanvas.cs" />
     <Compile Include="Domain\IShape.cs" />
     <Compile Include="Infrastructure\ICanvasFactory.cs" />
+    <Compile Include="Infrastructure\IDeserializer.cs" />
+    <Compile Include="Infrastructure\IFormatter.cs" />
+    <Compile Include="Infrastructure\ISerializer.cs" />
     <Compile Include="Infrastructure\PointExtensions.cs" />
     <Compile Include="Infrastructure\Vector.cs" />
     <Compile Include="Program.cs" />
