@@ -58,6 +58,8 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\BinDocumentFormatter.cs" />
+    <Compile Include="Domain\Document.cs" />
     <Compile Include="Infrastructure\Canvas.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -73,10 +75,15 @@
     <Compile Include="Infrastructure\ICanvas.cs" />
     <Compile Include="Domain\IShape.cs" />
     <Compile Include="Infrastructure\ICanvasFactory.cs" />
+    <Compile Include="Infrastructure\IDeserializer.cs" />
+    <Compile Include="Infrastructure\IFormatter.cs" />
+    <Compile Include="Infrastructure\ISerializer.cs" />
     <Compile Include="Infrastructure\PointExtensions.cs" />
     <Compile Include="Infrastructure\Vector.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\GUI.cs" />
+    <Compile Include="UI\IClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
