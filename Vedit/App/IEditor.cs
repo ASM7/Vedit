@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using Vedit.Domain;
+using Vedit.Infrastructure;
 
 namespace Vedit.App
 {
@@ -7,6 +8,8 @@ namespace Vedit.App
     {
         IShape CreateShape<TShape>() 
             where TShape : IShape, new();
-        Bitmap Draw(int width, int height);
+        Bitmap Draw(ImageSettings settings);
+        void MoveShape(Vector start, Vector end);
+        IShape FindShape(Vector point);
     }
 }

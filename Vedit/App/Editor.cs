@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using Vedit.Domain;
 using Vedit.Infrastructure;
@@ -8,12 +9,10 @@ namespace Vedit.App
     class Editor : IEditor
     {
         private List<IShape> shapes;
-        private ICanvasFactory canvasFactory;
 
-        public Editor(ICanvasFactory canvasFactory)
+        public Editor()
         {
             shapes = new List<IShape>();
-            this.canvasFactory = canvasFactory;
         }
 
         public IShape CreateShape<TShape>() 
@@ -25,19 +24,31 @@ namespace Vedit.App
             return shape;
         }
 
-        public Bitmap Draw(int width, int height)
+        public Bitmap Draw(ImageSettings settings)
         {
-            var bitmap = new Bitmap(width, height);
+            Console.WriteLine(shapes.Count);
+            var bitmap = new Bitmap(settings.Width, settings.Height);
             foreach (var shape in shapes)
             {
-                var canvas = canvasFactory.CreateCanvas();
+                var size = shape.BoundingRectSize;
+                var canvas = new Canvas {Image = new Bitmap(size.Width, size.Height)};
                 shape.Paint(canvas);
                 using (var g = Graphics.FromImage(bitmap))
                 {
-                    g.DrawImage(canvas.Image, shape.Position.ToDrawingPoint());
+                    g.DrawImage(canvas.GetImage(), shape.Position.ToDrawingPoint());
                 }
             }
             return bitmap;
+        }
+
+        void IEditor.MoveShape(Vector start, Vector end)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IShape FindShape(Vector point)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

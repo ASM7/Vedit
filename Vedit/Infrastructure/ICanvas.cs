@@ -5,6 +5,6 @@ namespace Vedit.Infrastructure
     public interface ICanvas
     {
         Graphics StartDrawing();
-        Bitmap Image { get; }
+        Bitmap GetImage();
     }
 }

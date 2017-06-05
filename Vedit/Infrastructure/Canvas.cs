@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Vedit.Infrastructure
 {
-    public class Canvas : PictureBox
+    public class Canvas : PictureBox, ICanvas
     {
         public Size GetImageSize()
         {
@@ -18,6 +18,11 @@ namespace Vedit.Infrastructure
             return Graphics.FromImage(Image);
         }
 
+        public Bitmap GetImage()
+        {
+            return (Bitmap)Image;
+        }
+
         public void SaveImage(string fileName)
         {
             FailIfNotInitialized();
@@ -27,7 +32,7 @@ namespace Vedit.Infrastructure
         private void FailIfNotInitialized()
         {
             if (Image == null)
-                throw new InvalidOperationException("Call Canvas.RecreateImage before other method call!");
+                throw new InvalidOperationException("Image is not initialized");
         }
     }
 }

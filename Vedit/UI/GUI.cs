@@ -1,33 +1,67 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Vedit.App;
+using Vedit.Domain;
 using Vedit.Infrastructure;
 namespace Vedit.UI
 {
     class Gui : Form, IClient
     {
-        public Gui(Canvas canvas, ImageSettings imageSettings)
+        private readonly IEditor editor;
+        private readonly Canvas canvas;
+        private readonly ImageSettings imageSettings;
+
+        private Vector mouseDownPoint;
+
+        public Gui(IEditor editor, Canvas canvas, ImageSettings imageSettings)
         {
-           
-            canvas.Image = new Bitmap(imageSettings.Width, imageSettings.Width);
+            this.editor = editor;
+            editor.CreateShape<Ellipse>();
+            this.canvas = canvas;
+            this.imageSettings = imageSettings;
+            Text = "Vedit";
+            //canvas.Image = new Bitmap(imageSettings.Width, imageSettings.Width);
+            canvas.Image = editor.Draw(imageSettings);
             ClientSize = canvas.Image.Size;
             canvas.Dock = DockStyle.Fill;
-            MouseClick += OnMouseClick;
-            MouseDown += OnMouseDown;
+            canvas.MouseClick += OnCanvasMouseClick;
+            canvas.MouseDown += OnCanvasMouseDown;
             Controls.Add(canvas);
         }
 
-        static void OnMouseDown(object sender, MouseEventArgs e)
+        void OnCanvasMouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDownPoint = new Vector(e.X, e.Y);
+        }
+
+        void OnCanvasMouseClick(object sender, MouseEventArgs e)
+        {
+            var mouseClickPoint = new Vector(e.X, e.Y);
+            if (mouseDownPoint == null || mouseDownPoint.Equals(mouseClickPoint))
+            {
+                var shape = editor.FindShape(mouseClickPoint);
+                canvas.Image = GetOriginalImage();
+                FocusOnShape(shape);
+            }
+            else
+            {
+                editor.MoveShape(mouseDownPoint, mouseClickPoint);
+                canvas.Image = GetOriginalImage();
+            }
+            Refresh();
+            mouseDownPoint = null;
+        }
+
+        Bitmap GetOriginalImage()
+        {
+            return editor.Draw(imageSettings);
+        }
+
+        void FocusOnShape(IShape shape)
         {
             
         }
-
-
-        static void OnMouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
 
         public void Run()
         {

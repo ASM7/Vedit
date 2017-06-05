@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using Vedit.Infrastructure;
 
 namespace Vedit.Domain
@@ -6,11 +7,11 @@ namespace Vedit.Domain
     public class Ellipse : IShape
     {
         public Vector Position { get; set; }
-        public Size BoundingRectSize { get; set; }
+        public Size BoundingRectSize { get; set; } = new Size(150, 100);
         public double Angle { get; set; }
-        public float LineWidth { get; set; }
-        public Color LineColor { get; set; }
-        public Color FillColor { get; set; }
+        public float LineWidth { get; set; } = 7;
+        public Color LineColor { get; set; } = Color.DeepPink;
+        public Color FillColor { get; set; } = Color.CornflowerBlue;
 
         public void Paint(ICanvas canvas)
         {
