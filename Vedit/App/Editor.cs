@@ -1,18 +1,16 @@
-﻿using System.Drawing;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using Vedit.Domain;
 using Vedit.Infrastructure;
 
-namespace Vedit.Application
+namespace Vedit.App
 {
-    class Application : IApplication
+    class Editor : IEditor
     {
         private List<IShape> shapes;
         private ICanvasFactory canvasFactory;
 
-        public Application(ICanvasFactory canvasFactory)
+        public Editor(ICanvasFactory canvasFactory)
         {
             shapes = new List<IShape>();
             this.canvasFactory = canvasFactory;

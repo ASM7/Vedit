@@ -39,13 +39,21 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\Application.cs" />
-    <Compile Include="Application\IApplication.cs" />
     <Compile Include="Domain\BinDocumentFormatter.cs" />
     <Compile Include="Domain\Document.cs" />
-    <Compile Include="Infrastructure\Extension.cs" />
+    <Compile Include="Infrastructure\Canvas.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Infrastructure\ImageSettings.cs" />
+    <Compile Include="UI\Gui.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\IClient.cs" />
+    <Compile Include="App\Editor.cs" />
+    <Compile Include="App\IEditor.cs" />
     <Compile Include="Domain\Ellipse.cs" />
     <Compile Include="Domain\Segment.cs" />
     <Compile Include="Infrastructure\ICanvas.cs" />
@@ -67,11 +75,4 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
