@@ -60,8 +60,10 @@
   <ItemGroup>
     <Compile Include="App\IPainter.cs" />
     <Compile Include="App\Painter.cs" />
+    <Compile Include="App\SelectedShape.cs" />
     <Compile Include="Domain\BinDocumentFormatter.cs" />
     <Compile Include="Domain\Document.cs" />
+    <Compile Include="Domain\IDrawable.cs" />
     <Compile Include="Domain\Shape.cs" />
     <Compile Include="Infrastructure\Canvas.cs">
       <SubType>Component</SubType>
