@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using Vedit.Infrastructure;
 
 namespace Vedit.Domain
 {
     public class Document
     {
-        public Document(Size canvasSize)
+        public Document(ImageSettings imageSettings)
         {
-            CanvasSize = canvasSize;
+            ImageSettings = imageSettings;
             Shapes = new List<IShape>();
         }
 
         public List<IShape> Shapes { get; }
-        public Size CanvasSize { get; set; }
+        public ImageSettings ImageSettings { get; }
     }
 }
