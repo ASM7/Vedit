@@ -3,24 +3,18 @@ using Vedit.Infrastructure;
 
 namespace Vedit.Domain
 {
-    public class Segment: IShape
+    public class Segment: Shape
     {
-        public Vector Position { get; set; }
-        public Size BoundingRectSize { get; set; }
-        public double Angle { get; set; }
         public float LineWidth { get; set; }
         public Color Color { get; set; }
-
-        public void Draw(ICanvas canvas)
+        
+        protected override void PaintStraight(Graphics graphics)
         {
             var pen = new Pen(Color, LineWidth);
-            using (var graphics = canvas.StartDrawing())
-            {
-                graphics.DrawLine(
-                    pen,
-                    Position.ToDrawingPoint(),
-                    (Position + new Vector(0, BoundingRectSize.Width)).ToDrawingPoint());
-            }
+            graphics.DrawLine(
+                pen,
+                Position.ToDrawingPoint(),
+                (Position + new Vector(0, BoundingRectSize.Width)).ToDrawingPoint());
         }
     }
 }
