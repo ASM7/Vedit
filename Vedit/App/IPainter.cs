@@ -11,6 +11,6 @@ namespace Vedit.App
 {
     interface IPainter
     {
-        void Draw(Bitmap bitmap, IEnumerable<IShape> shapes);
+        void Draw(Bitmap bitmap, IEnumerable<IDrawable> drawables);
     }
 }
