@@ -9,6 +9,6 @@ namespace Vedit.Domain
         Size BoundingRectSize { get; set; }
         float Angle { get; set; }
 
-        void Paint(ICanvas canvas);
+        void Paint(Bitmap bitmap);
     }
 }

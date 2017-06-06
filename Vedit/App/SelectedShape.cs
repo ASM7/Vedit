@@ -56,7 +56,7 @@ namespace Vedit.App
             }
         }
 
-        public void Paint(ICanvas canvas)
+        public void Paint(Bitmap bitmap)
         {
             throw new NotImplementedException();
         }

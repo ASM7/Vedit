@@ -10,9 +10,9 @@ namespace Vedit.Domain
         public Size BoundingRectSize { get; set; } = new Size(100, 100);
         public float Angle { get; set; }
 
-        public void Paint(ICanvas canvas)
+        public void Paint(Bitmap bitmap)
         {
-            using (var graphics = canvas.StartDrawing())
+            using (var graphics = Graphics.FromImage(bitmap))
             {
                 graphics.TranslateTransform(Position);
 
