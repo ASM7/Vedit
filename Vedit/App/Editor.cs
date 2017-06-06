@@ -8,11 +8,13 @@ namespace Vedit.App
 {
     class Editor : IEditor
     {
-        private List<IShape> shapes;
+        private IPainter painter;
+        private Document document;
 
-        public Editor()
+        public Editor(IPainter painter, Document document)
         {
-            shapes = new List<IShape>();
+            this.painter = painter;
+            this.document = document;
         }
 
         public IShape CreateShape<TShape>() 
@@ -20,24 +22,14 @@ namespace Vedit.App
         {
             var shape = new TShape();
             shape.Position = new Vector(0, 0);
-            shapes.Add(shape);
+            document.Shapes.Add(shape);
             return shape;
         }
 
         public Bitmap Draw(ImageSettings settings)
         {
-            Console.WriteLine(shapes.Count);
             var bitmap = new Bitmap(settings.Width, settings.Height);
-            foreach (var shape in shapes)
-            {
-                var size = shape.BoundingRectSize;
-                var canvas = new Canvas {Image = new Bitmap(size.Width, size.Height)};
-                shape.Paint(canvas);
-                using (var g = Graphics.FromImage(bitmap))
-                {
-                    g.DrawImage(canvas.GetImage(), shape.Position.ToDrawingPoint());
-                }
-            }
+            painter.Draw(bitmap, document.Shapes);
             return bitmap;
         }
 

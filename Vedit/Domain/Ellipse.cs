@@ -13,7 +13,7 @@ namespace Vedit.Domain
         public Color LineColor { get; set; } = Color.DeepPink;
         public Color FillColor { get; set; } = Color.CornflowerBlue;
 
-        public void Paint(ICanvas canvas)
+        public void Draw(ICanvas canvas)
         {
             var brush = new SolidBrush(FillColor);
             var pen = new Pen(LineColor, LineWidth);

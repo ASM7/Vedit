@@ -58,12 +58,15 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\IPainter.cs" />
+    <Compile Include="App\Painter.cs" />
     <Compile Include="Domain\BinDocumentFormatter.cs" />
     <Compile Include="Domain\Document.cs" />
     <Compile Include="Infrastructure\Canvas.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Infrastructure\ImageSettings.cs" />
+    <Compile Include="Infrastructure\IDrawable.cs" />
     <Compile Include="UI\Gui.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,7 +77,6 @@
     <Compile Include="Domain\Segment.cs" />
     <Compile Include="Infrastructure\ICanvas.cs" />
     <Compile Include="Domain\IShape.cs" />
-    <Compile Include="Infrastructure\ICanvasFactory.cs" />
     <Compile Include="Infrastructure\IDeserializer.cs" />
     <Compile Include="Infrastructure\IFormatter.cs" />
     <Compile Include="Infrastructure\ISerializer.cs" />

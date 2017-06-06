@@ -11,7 +11,7 @@ namespace Vedit.Domain
         public float LineWidth { get; set; }
         public Color Color { get; set; }
 
-        public void Paint(ICanvas canvas)
+        public void Draw(ICanvas canvas)
         {
             var pen = new Pen(Color, LineWidth);
             using (var graphics = canvas.StartDrawing())
