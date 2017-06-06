@@ -10,11 +10,13 @@ namespace Vedit.App
     {
         private IPainter painter;
         private Document document;
+        private HashSet<SelectedShape> selected;
 
         public Editor(IPainter painter, Document document)
         {
             this.painter = painter;
             this.document = document;
+            selected = new HashSet<SelectedShape>();
         }
 
         public IShape CreateShape<TShape>() 
@@ -40,7 +42,12 @@ namespace Vedit.App
 
         public IShape FindShape(Vector point)
         {
-            throw new System.NotImplementedException();
+            return document.FindShape(point);
+        }
+
+        public void SelectShape(IShape shape)
+        {
+            selected.Add(new SelectedShape(shape));
         }
     }
 }

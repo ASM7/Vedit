@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using Vedit.Infrastructure;
 
@@ -14,5 +15,10 @@ namespace Vedit.Domain
 
         public List<IShape> Shapes { get; }
         public ImageSettings ImageSettings { get; }
+
+        public IShape FindShape(Vector point)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
