@@ -60,9 +60,11 @@
   <ItemGroup>
     <Compile Include="Domain\BinDocumentFormatter.cs" />
     <Compile Include="Domain\Document.cs" />
+    <Compile Include="Domain\Shape.cs" />
     <Compile Include="Infrastructure\Canvas.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Infrastructure\GraphicsExtensions.cs" />
     <Compile Include="Infrastructure\ImageSettings.cs" />
     <Compile Include="UI\Gui.cs">
       <SubType>Form</SubType>

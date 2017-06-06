@@ -7,7 +7,7 @@ namespace Vedit.Domain
     {
         Vector Position { get; set; }
         Size BoundingRectSize { get; set; }
-        double Angle { get; set; }
+        float Angle { get; set; }
 
         void Paint(ICanvas canvas);
     }
