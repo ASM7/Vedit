@@ -41,9 +41,9 @@ namespace Vedit.App
             return bitmap;
         }
 
-        void IEditor.MoveShape(Vector start, Vector end)
+        public void MoveShape(IShape shape, Vector offset)
         {
-            throw new System.NotImplementedException();
+            shape.Position += offset;
         }
 
         public IShape FindShape(Vector point)

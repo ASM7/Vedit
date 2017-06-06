@@ -9,7 +9,7 @@ namespace Vedit.App
         IShape CreateShape<TShape>() 
             where TShape : IShape, new();
         Bitmap Draw(ImageSettings settings);
-        void MoveShape(Vector start, Vector end);
+        void MoveShape(IShape shape, Vector offset);
         IShape FindShape(Vector point);
     }
 }
