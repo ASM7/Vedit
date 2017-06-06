@@ -46,7 +46,9 @@ namespace Vedit.UI
             }
             else
             {
-                editor.MoveShape(mouseDownPoint, mouseClickPoint);
+                var shape = editor.FindShape(mouseDownPoint);
+                var offset = mouseClickPoint - mouseDownPoint;
+                editor.MoveShape(shape, offset);
                 canvas.Image = GetOriginalImage();
             }
             Refresh();
