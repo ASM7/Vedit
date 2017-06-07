@@ -11,20 +11,20 @@ namespace Vedit.App
     {
         public Document Document { get; }
         private IPainter painter;
-        private HashSet<SelectedShape> selected;
+        private HashSet<SelectedShape> selectedShapes;
 
         public Editor(IPainter painter, Document document)
         {
             this.painter = painter;
             Document = document;
-            selected = new HashSet<SelectedShape>();
+            selectedShapes = new HashSet<SelectedShape>();
         }
 
         public Bitmap Draw(ImageSettings settings)
         {
             var bitmap = new Bitmap(settings.Width, settings.Height);
             painter.Draw(bitmap, Document.Shapes);
-            painter.Draw(bitmap, selected);
+            painter.Draw(bitmap, selectedShapes);
             return bitmap;
         }
 
@@ -35,12 +35,34 @@ namespace Vedit.App
 
         public void SelectShape(IShape shape)
         {
-            selected.Add(new SelectedShape(shape));
+            selectedShapes.Add(new SelectedShape(shape));
         }
 
         public void ClearSelection()
         {
-            selected = new HashSet<SelectedShape>();
+            selectedShapes = new HashSet<SelectedShape>();
+        }
+
+        public void InteractWithShape(IShape shape, Vector start, Vector end)
+        {
+            shape.Position += end - start;
+            //var selected = TryFindSelectedShape(shape);
+            //if (selected == null)
+            //{
+            //    shape.Position += end - start;
+            //}
+            //else
+            //{
+            //    foreach (var point in )
+            //}
+        }
+
+        private SelectedShape TryFindSelectedShape(IShape shape)
+        {
+            foreach (var selectedShape in selectedShapes)
+                if (selectedShape.shape.Equals(shape))
+                    return selectedShape;
+            return null;
         }
     }
 }

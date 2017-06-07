@@ -18,7 +18,7 @@ namespace Vedit.App
             this.shape = shape;
         }
 
-        private IShape shape;
+        public readonly IShape shape;
         
         protected override void PaintStraight(Graphics graphics)
         {
