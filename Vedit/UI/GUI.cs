@@ -12,7 +12,7 @@ namespace Vedit.UI
         private readonly IEditor editor;
         private readonly PictureBox picture;
         private readonly ImageSettings imageSettings;
-
+        private readonly PropertyGrid propertiesPanel;
         private Vector mousePoint;
 
         public Gui(IEditor editor, ToolPanel toolPanel, ImageSettings imageSettings)
@@ -25,7 +25,7 @@ namespace Vedit.UI
             AutoSizeMode = AutoSizeMode.GrowOnly;
 
             Paint += (sender, e) => RedrawPicture();
-            var layoutPanel = new TableLayoutPanel() {AutoSize = true, AutoSizeMode = AutoSizeMode.GrowOnly};
+            var layoutPanel = new TableLayoutPanel() {AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink};
 
             picture = new PictureBox {SizeMode = PictureBoxSizeMode.AutoSize};
             InitPicture(editor.Draw(imageSettings));
@@ -37,9 +37,16 @@ namespace Vedit.UI
             layoutPanel.Controls.Add(picture);
             layoutPanel.SetCellPosition(picture, new TableLayoutPanelCellPosition(1, 0));
 
-            //layoutPanel.Controls.Add(propertiesPanel);
-            //layoutPanel.SetCellPosition(picture, new TableLayoutPanelCellPosition(2, 0));
-
+            propertiesPanel = new PropertyGrid
+            {
+                Width = 300,
+                Dock = DockStyle.Fill
+            };
+            propertiesPanel.PropertyValueChanged += (sender, e) => RedrawPicture();
+            
+            layoutPanel.Controls.Add(propertiesPanel);
+            layoutPanel.SetCellPosition(propertiesPanel, new TableLayoutPanelCellPosition(2, 0));
+            
             Controls.Add(layoutPanel);
         }
 
@@ -63,7 +70,16 @@ namespace Vedit.UI
             editor.ClearSelection();
             var shape = editor.Document.FindShape(e.Location.ToVector());
             if (shape != null)
+            {
                 editor.SelectShape(shape);
+                propertiesPanel.SelectedObject = shape;
+                propertiesPanel.Show();
+            }
+            else
+            {
+                propertiesPanel.Hide();
+            }
+                
         }
 
         void OnPictureMouseMove(object sender, MouseEventArgs e)
@@ -76,26 +92,19 @@ namespace Vedit.UI
                 if (shape != null)
                     editor.InteractWithShape(shape, start, end);
                 Refresh();
+                propertiesPanel.Refresh();
             }
             mousePoint = end;
         }
 
         void OnCanvasMouseClick(object sender, MouseEventArgs e)
         {
-            var mouseClickPoint = new Vector(e.X, e.Y);
-
-            Refresh();
-           
+            Refresh();           
         }
 
         Bitmap GetOriginalImage()
         {
             return editor.Draw(imageSettings);
-        }
-
-        void FocusOnShape(IShape shape)
-        {
-            
         }
 
         public void Run()
