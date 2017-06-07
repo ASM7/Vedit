@@ -8,41 +8,27 @@ namespace Vedit.App
 {
     class Editor : IEditor
     {
+        public Document Document { get; }
         private IPainter painter;
-        private Document document;
         private HashSet<SelectedShape> selected;
 
         public Editor(IPainter painter, Document document)
         {
             this.painter = painter;
-            this.document = document;
+            Document = document;
             selected = new HashSet<SelectedShape>();
-        }
-
-        public IShape CreateShape<TShape>() 
-            where TShape : IShape, new()
-        {
-            var shape = new TShape();
-            shape.Position = new Vector(0, 0);
-            document.Shapes.Add(shape);
-            return shape;
         }
 
         public Bitmap Draw(ImageSettings settings)
         {
             var bitmap = new Bitmap(settings.Width, settings.Height);
-            painter.Draw(bitmap, document.Shapes);
+            painter.Draw(bitmap, Document.Shapes);
             return bitmap;
         }
 
         public void MoveShape(IShape shape, Vector offset)
         {
             shape.Position += offset;
-        }
-
-        public IShape FindShape(Vector point)
-        {
-            return document.FindShape(point);
         }
 
         public void SelectShape(IShape shape)

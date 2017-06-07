@@ -17,7 +17,7 @@ namespace Vedit.UI
         public Gui(IEditor editor, Canvas canvas, ImageSettings imageSettings)
         {
             this.editor = editor;
-            editor.CreateShape<Ellipse>();
+            editor.Document.CreateShape<Ellipse>();
             this.canvas = canvas;
             this.imageSettings = imageSettings;
             Text = "Vedit";
@@ -40,13 +40,13 @@ namespace Vedit.UI
             var mouseClickPoint = new Vector(e.X, e.Y);
             if (mouseDownPoint == null || mouseDownPoint.Equals(mouseClickPoint))
             {
-                var shape = editor.FindShape(mouseClickPoint);
+                var shape = editor.Document.FindShape(mouseClickPoint);
                 canvas.Image = GetOriginalImage();
                 FocusOnShape(shape);
             }
             else
             {
-                var shape = editor.FindShape(mouseDownPoint);
+                var shape = editor.Document.FindShape(mouseDownPoint);
                 var offset = mouseClickPoint - mouseDownPoint;
                 editor.MoveShape(shape, offset);
                 canvas.Image = GetOriginalImage();

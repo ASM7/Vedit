@@ -64,7 +64,7 @@
     <Compile Include="Domain\BinDocumentFormatter.cs" />
     <Compile Include="Domain\Document.cs" />
     <Compile Include="Domain\IDrawable.cs" />
-    <Compile Include="Domain\Shape.cs" />
+    <Compile Include="Domain\DrawableObject.cs" />
     <Compile Include="Infrastructure\Canvas.cs">
       <SubType>Component</SubType>
     </Compile>

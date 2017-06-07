@@ -16,6 +16,14 @@ namespace Vedit.Domain
         public List<IShape> Shapes { get; }
         public ImageSettings ImageSettings { get; }
 
+        public IShape CreateShape<TShape>()
+            where TShape : IShape, new()
+        {
+            var shape = new TShape {Position = new Vector(0, 0)};
+            Shapes.Add(shape);
+            return shape;
+        }
+
         public IShape FindShape(Vector point)
         {
             throw new NotImplementedException();
