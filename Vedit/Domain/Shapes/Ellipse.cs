@@ -15,7 +15,7 @@ namespace Vedit.Domain.Shapes
         {
             var brush = new SolidBrush(FillColor);
             var pen = new Pen(LineColor, LineWidth);
-            var rectangle = new Rectangle(Position.ToDrawingPoint(), BoundingRectSize);
+            var rectangle = this.GetBoundingRectangle();
             graphics.FillEllipse(brush, rectangle);
             graphics.DrawEllipse(pen, rectangle);
         }
