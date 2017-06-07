@@ -33,7 +33,7 @@ namespace Vedit.App
                     if (x == 1 && y == 1)
                         continue;
                     var circle = new KeyPoint();
-                    circle.Position = new Vector(Position.X + x * BoundingRectSize.Width/4, Position.Y + y * BoundingRectSize.Height/4);
+                    circle.Position = new Vector(shape.Position.X + x * BoundingRectSize.Width/4, shape.Position.Y + y * BoundingRectSize.Height/4);
                     circle.BoundingRectSize = new Size(5, 5);
                     circle.Paint(graphics);
                 }
