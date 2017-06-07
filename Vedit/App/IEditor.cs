@@ -10,5 +10,6 @@ namespace Vedit.App
         Document Document { get; }
         Bitmap Draw(ImageSettings settings);
         void MoveShape(IShape shape, Vector offset);
+        void SelectShape(IShape shape);
     }
 }
