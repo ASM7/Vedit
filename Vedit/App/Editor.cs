@@ -110,5 +110,14 @@ namespace Vedit.App
                 
             return new ClickContext(Document.FindShape(point), null);
         }
+
+        public void FixSize(IShape shape)
+        {
+            if (shape.BoundingRectSize.Width < 0)
+                shape.Position += new Vector(shape.BoundingRectSize.Width, 0);
+            if (shape.BoundingRectSize.Height < 0)
+                shape.Position += new Vector(0, shape.BoundingRectSize.Height);
+            shape.BoundingRectSize = new Size(Math.Abs(shape.BoundingRectSize.Width), Math.Abs(shape.BoundingRectSize.Height));
+        }
     }
 }

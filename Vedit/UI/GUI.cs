@@ -69,6 +69,13 @@ namespace Vedit.UI
             picture.MouseClick += OnCanvasMouseClick;
             picture.MouseMove += OnPictureMouseMove;
             picture.MouseDown += OnCanvasMouseDown;
+            picture.MouseUp += OnCanvasMouseUp;
+        }
+
+        private void OnCanvasMouseUp(object sender, MouseEventArgs e)
+        {
+            if (currentClickContext.Shape != null)
+                editor.FixSize(currentClickContext.Shape);
         }
 
         void RedrawPicture()

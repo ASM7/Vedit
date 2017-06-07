@@ -14,5 +14,6 @@ namespace Vedit.App
         void ClearSelection();
         ClickContext FindShape(Vector point);
         void InteractWithShape(ClickContext clickContext, Vector offset);
+        void FixSize(IShape shape);
     }
 }
