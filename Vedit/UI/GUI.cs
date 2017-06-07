@@ -76,10 +76,12 @@ namespace Vedit.UI
             picture.Image = editor.Draw(imageSettings);
         }
 
+        private ClickContext currentClickContext;
 
         void OnCanvasMouseDown(object sender, MouseEventArgs e)
         {
-            var shape = editor.FindShape(e.Location.ToVector());
+            currentClickContext = editor.FindShape(e.Location.ToVector());
+            var shape = currentClickContext.Shape;
             if (shape != null)
             {
                 editor.SelectShape(shape);
@@ -99,9 +101,8 @@ namespace Vedit.UI
             var end = e.Location.ToVector();
             if (e.Button == MouseButtons.Left)
             {
-                var shape = editor.FindShape(start);
-                if (shape != null)
-                    editor.InteractWithShape(shape, start, end);
+                if (currentClickContext.Shape != null)
+                    editor.InteractWithShape(currentClickContext, end - start);
                 Refresh();
                 propertiesPanel.Refresh();
             }

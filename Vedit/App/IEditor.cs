@@ -12,7 +12,7 @@ namespace Vedit.App
         void MoveShape(IShape shape, Vector offset);
         void SelectShape(IShape shape);
         void ClearSelection();
-        IShape FindShape(Vector point);
-        void InteractWithShape(IShape shape, Vector start, Vector end);
+        ClickContext FindShape(Vector point);
+        void InteractWithShape(ClickContext clickContext, Vector offset);
     }
 }

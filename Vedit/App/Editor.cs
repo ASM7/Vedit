@@ -54,26 +54,25 @@ namespace Vedit.App
             selectedShapes = new HashSet<SelectedShape>();
         }
 
-        public void InteractWithShape(IShape shape, Vector start, Vector end)
+        public void InteractWithShape(ClickContext clickContext, Vector offset)
         {
+            var shape = clickContext.Shape;
             var selected = TryFindSelectedShape(shape);
-            var delta = end - start;
             if (selected == null)
             {
-                shape.Position += delta;
+                shape.Position += offset;
             }
             else
             {
-                var points = selected.CreatePoints();
-                var startPoint = FindKeyPoint(points, start);
+                var startPoint = clickContext.KeyPoint;
                 if (startPoint != null)
                 {
-                    shape.Position += new Vector(startPoint.OffsetPositionVector.X * delta.X, startPoint.OffsetPositionVector.Y * delta.Y);
-                    shape.BoundingRectSize += new Size((int)(startPoint.OffsetSizeVector.X * delta.X), (int)(startPoint.OffsetSizeVector.Y * delta.Y));
+                    shape.Position += new Vector(startPoint.OffsetPositionVector.X * offset.X, startPoint.OffsetPositionVector.Y * offset.Y);
+                    shape.BoundingRectSize += new Size((int)(startPoint.OffsetSizeVector.X * offset.X), (int)(startPoint.OffsetSizeVector.Y * offset.Y));
                 }
                 else
                 {
-                    shape.Position += delta;
+                    shape.Position += offset;
                 }
             }
         }
@@ -98,14 +97,18 @@ namespace Vedit.App
             return null;
         }
 
-        public IShape FindShape(Vector point)
+        public ClickContext FindShape(Vector point)
         {
             foreach (var selected in selectedShapes)
-                if (FindKeyPoint(selected.CreatePoints(), point) != null)
+            {
+                var keyPoint = FindKeyPoint(selected.CreatePoints(), point);
+                if (keyPoint != null)
                 {
-                    return selected.shape;
+                    return new ClickContext(selected.shape, keyPoint);
                 }
-            return Document.FindShape(point);
+            }
+                
+            return new ClickContext(Document.FindShape(point), null);
         }
     }
 }
