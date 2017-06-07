@@ -1,8 +1,10 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using Vedit.Infrastructure;
 
-namespace Vedit.Domain
+namespace Vedit.Domain.Shapes
 {
+    [Serializable]
     public class Segment: DrawableObject, IShape
     {
         public float LineWidth { get; set; }

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Vedit.App;
 using Vedit.Domain;
+using Vedit.Domain.Shapes;
 using Vedit.Infrastructure;
 namespace Vedit.UI
 {

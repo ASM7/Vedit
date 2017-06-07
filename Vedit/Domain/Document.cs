@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using Vedit.Domain.Shapes;
 using Vedit.Infrastructure;
 
 namespace Vedit.Domain
 {
+    [Serializable]
     public class Document
     {
+        public Document() { }
+
         public Document(ImageSettings imageSettings)
         {
             ImageSettings = imageSettings;

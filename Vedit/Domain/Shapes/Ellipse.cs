@@ -2,8 +2,9 @@
 using System.Drawing;
 using Vedit.Infrastructure;
 
-namespace Vedit.Domain
+namespace Vedit.Domain.Shapes
 {
+    [Serializable]
     public class Ellipse : DrawableObject, IShape
     {
         public float LineWidth { get; set; } = 7;

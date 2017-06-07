@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using Vedit.Domain;
+using Vedit.Domain.Shapes;
 using Vedit.Infrastructure;
 
 namespace Vedit.App
