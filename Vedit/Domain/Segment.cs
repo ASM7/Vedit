@@ -3,7 +3,7 @@ using Vedit.Infrastructure;
 
 namespace Vedit.Domain
 {
-    public class Segment: Shape
+    public class Segment: DrawableObject, IShape
     {
         public float LineWidth { get; set; }
         public Color Color { get; set; }

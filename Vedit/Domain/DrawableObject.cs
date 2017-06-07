@@ -4,7 +4,7 @@ using Vedit.Infrastructure;
 
 namespace Vedit.Domain
 {
-    public abstract class Shape : IShape
+    public abstract class DrawableObject : IDrawable
     {
         public Vector Position { get; set; } = Vector.Zero;
         public Size BoundingRectSize { get; set; } = new Size(100, 100);

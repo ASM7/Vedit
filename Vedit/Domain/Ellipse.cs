@@ -4,7 +4,7 @@ using Vedit.Infrastructure;
 
 namespace Vedit.Domain
 {
-    public class Ellipse : Shape
+    public class Ellipse : DrawableObject, IShape
     {
         public float LineWidth { get; set; } = 7;
         public Color LineColor { get; set; } = Color.DeepPink;
