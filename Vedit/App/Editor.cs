@@ -24,6 +24,7 @@ namespace Vedit.App
         {
             var bitmap = new Bitmap(settings.Width, settings.Height);
             painter.Draw(bitmap, Document.Shapes);
+            painter.Draw(bitmap, selected);
             return bitmap;
         }
 
