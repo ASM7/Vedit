@@ -22,6 +22,7 @@ namespace Vedit
             var kernel = new StandardKernel();
             kernel.Bind<IClient>().To<Gui>();
             kernel.Bind<IEditor>().To<Editor>();
+            kernel.Bind<IPainter>().To<Painter>();
             kernel.Bind<ImageSettings>().ToConstant(new ImageSettings {Width = 500, Height = 500});
             return kernel.Get<IClient>();
         }
