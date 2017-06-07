@@ -11,7 +11,7 @@ namespace Vedit.Infrastructure
 
         public static double DistanceTo(this Point from, Point to)
         {
-            return (new Vector(from) - new Vector(to)).Length;
+            return (from.ToVector() - to.ToVector()).Length;
         }
     }
 }
