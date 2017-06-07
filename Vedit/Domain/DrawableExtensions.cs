@@ -5,10 +5,14 @@ namespace Vedit.Domain
 {
     public static class DrawableExtensions
     {
+        public static Rectangle GetBoundingRectangle(this IDrawable drawable)
+        {
+            return new Rectangle(drawable.Position.ToDrawingPoint(), drawable.BoundingRectSize);
+        }
+
         public static bool ContainsPoint(this IDrawable drawable, Vector point)
         {
-            var rectangle = new Rectangle(point.ToDrawingPoint(), drawable.BoundingRectSize);
-            return rectangle.Contains(point.ToDrawingPoint());
+            return drawable.GetBoundingRectangle().Contains(point.ToDrawingPoint());
         }
     }
 }
