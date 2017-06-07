@@ -63,6 +63,7 @@
     <Compile Include="App\SelectedShape.cs" />
     <Compile Include="Domain\BinDocumentFormatter.cs" />
     <Compile Include="Domain\Document.cs" />
+    <Compile Include="Domain\DrawableExtensions.cs" />
     <Compile Include="Domain\IDrawable.cs" />
     <Compile Include="Domain\DrawableObject.cs" />
     <Compile Include="Infrastructure\Canvas.cs">

@@ -26,7 +26,7 @@ namespace Vedit.Domain
 
         public IShape FindShape(Vector point)
         {
-            throw new NotImplementedException();
+            return Shapes.Find(s => s.ContainsPoint(point));
         }
     }
 }
