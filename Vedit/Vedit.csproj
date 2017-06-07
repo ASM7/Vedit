@@ -69,7 +69,6 @@
     <Compile Include="Domain\SelectionPrimitives\ISelectionPrimitive.cs" />
     <Compile Include="Domain\SelectionPrimitives\KeyPoint.cs" />
     <Compile Include="Domain\SelectionPrimitives\SelectionFrame.cs" />
-    <Compile Include="Infrastructure\ActionExtension.cs" />
     <Compile Include="Infrastructure\Serialization\ObjectDeserializer.cs" />
     <Compile Include="Infrastructure\Serialization\ObjectSerializer.cs" />
     <Compile Include="Domain\Document.cs" />
