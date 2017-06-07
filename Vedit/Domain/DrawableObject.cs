@@ -12,7 +12,12 @@ namespace Vedit.Domain
 
         public void Paint(Bitmap bitmap)
         {
-            using (var graphics = Graphics.FromImage(bitmap))
+            Paint(Graphics.FromImage(bitmap));
+        }
+
+        public void Paint(Graphics graphics)
+        {
+            using (graphics)
             {
                 graphics.TranslateTransform(Position);
 

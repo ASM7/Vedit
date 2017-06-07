@@ -10,5 +10,6 @@ namespace Vedit.Domain
         float Angle { get; set; }
 
         void Paint(Bitmap bitmap);
+        void Paint(Graphics graphics);
     }
 }

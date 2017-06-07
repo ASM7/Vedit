@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vedit.Domain;
+using Vedit.Domain.SelectionPrimitives;
 using Vedit.Domain.Shapes;
 using Vedit.Infrastructure;
 
 namespace Vedit.App
 {
-    class SelectedShape : IDrawable
+    class SelectedShape : DrawableObject
     {
         public SelectedShape(IShape shape)
         {
@@ -18,48 +19,21 @@ namespace Vedit.App
         }
 
         private IShape shape;
-        Vector IDrawable.Position
+        
+        protected override void PaintStraight(Graphics graphics)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            var frame = new SelectionFrame();
+            frame.Paint(graphics);
+            for (int x = 0; x <= 2; x++)
+                for (int y= 0; y <= 2; y++)
+                {
+                    if (x == 1 && y == 1)
+                        continue;
+                    var circle = new KeyPoint();
+                    circle.Position = new Vector(Position.X + x * BoundingRectSize.Width, Position.Y + y * BoundingRectSize.Height);
+                    circle.Paint(graphics);
+                }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        Size IDrawable.BoundingRectSize
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        float IDrawable.Angle
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public void Paint(Bitmap bitmap)
-        {
-            throw new NotImplementedException();
         }
     }
 }
