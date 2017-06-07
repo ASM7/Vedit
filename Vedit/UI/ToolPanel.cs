@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vedit.App;
+using Vedit.Infrastructure;
 
 namespace Vedit.UI
 {
     class ToolPanel : TableLayoutPanel
     {
-        public ToolPanel(IToolButton[] toolButtons, Editor editor, ToolPanelSettings settings)
+        public ToolPanel(IToolButton[] toolButtons, IEditor editor, ToolPanelSettings settings)
         {
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowOnly;
@@ -19,16 +20,24 @@ namespace Vedit.UI
             var buttons = toolButtons.Select(b =>
             {
                 var button = new Button {Image = b.GetImage(settings.ButtonSize) };
-                button.Click += WrapClick(() => b.OnClick(editor));
+                Action action = () => b.OnClick(editor);
+                button.Click += action.ToEventHandler();
                 button.Size = settings.ButtonSize;
                 return button;
             }).ToArray();
             Controls.AddRange(buttons);
         }
 
-        private static EventHandler WrapClick(Action action)
+        public void AddActionOnClick(Action action)
         {
-            return (sender, e) => action();
+            foreach (var control in Controls)
+            {
+                if (control is Button)
+                {
+                    ((Button) control).Click += action.ToEventHandler();
+                }
+            }
         }
+
     }
 }

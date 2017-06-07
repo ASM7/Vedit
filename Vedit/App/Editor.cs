@@ -12,6 +12,7 @@ namespace Vedit.App
         public Document Document { get; }
         private IPainter painter;
         private HashSet<SelectedShape> selected;
+        public int n;
 
         public Editor(IPainter painter, Document document)
         {

@@ -6,6 +6,6 @@ namespace Vedit.UI
     internal interface IToolButton
     {
         Bitmap GetImage(Size size);
-        void OnClick(Editor editor);
+        void OnClick(IEditor editor);
     }
 }
