@@ -14,16 +14,13 @@ namespace Vedit.UI
             var result =  new Bitmap(size.Width, size.Height);
             var shape = new TShape();
             shape.BoundingRectSize = size;
-            using (var g = Graphics.FromImage(result))
-            {
-                
-            }
+            shape.Paint(result);
             return result;
         }
 
         public void OnClick(Editor editor)
         {
-            throw new NotImplementedException();
+            editor.Document.Shapes.Add(new TShape());
         }
 
     }
