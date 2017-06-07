@@ -81,6 +81,7 @@
     <Compile Include="Infrastructure\GraphicsExtensions.cs" />
     <Compile Include="Infrastructure\ImageSettings.cs" />
     <Compile Include="Infrastructure\VectorExtensions.cs" />
+    <Compile Include="UI\EllipseButton.cs" />
     <Compile Include="UI\Gui.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +99,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\IToolButton.cs" />
+    <Compile Include="UI\SegmentButton.cs" />
     <Compile Include="UI\ShapeButton.cs" />
     <Compile Include="UI\ToolPanel.cs">
       <SubType>Component</SubType>
