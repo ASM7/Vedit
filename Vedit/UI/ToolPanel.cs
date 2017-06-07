@@ -20,8 +20,7 @@ namespace Vedit.UI
             var buttons = toolButtons.Select(b =>
             {
                 var button = new Button {Image = b.GetImage(settings.ButtonSize) };
-                Action action = () => b.OnClick(editor);
-                button.Click += action.ToEventHandler();
+                button.Click += (sender, e) => b.OnClick(editor);
                 button.Size = settings.ButtonSize;
                 return button;
             }).ToArray();
@@ -34,7 +33,7 @@ namespace Vedit.UI
             {
                 if (control is Button)
                 {
-                    ((Button) control).Click += action.ToEventHandler();
+                    ((Button) control).Click += (sender, e) => action();
                 }
             }
         }
