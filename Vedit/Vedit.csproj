@@ -71,6 +71,7 @@
     </Compile>
     <Compile Include="Infrastructure\GraphicsExtensions.cs" />
     <Compile Include="Infrastructure\ImageSettings.cs" />
+    <Compile Include="Infrastructure\VectorExtensions.cs" />
     <Compile Include="UI\Gui.cs">
       <SubType>Form</SubType>
     </Compile>
