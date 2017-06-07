@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Ninject;
 using Ninject.Activation;
+using Ninject.Extensions.Conventions;
 using Vedit.App;
 using Vedit.Infrastructure;
 using Vedit.UI;
@@ -24,6 +25,10 @@ namespace Vedit
             kernel.Bind<IEditor>().To<Editor>();
             kernel.Bind<IPainter>().To<Painter>();
             kernel.Bind<ImageSettings>().ToConstant(new ImageSettings {Width = 500, Height = 500});
+            kernel.Bind(c => c.FromThisAssembly()
+                .SelectAllClasses()
+                .InheritedFrom<IToolButton>()
+                .BindAllInterfaces());
             return kernel.Get<IClient>();
         }
     }

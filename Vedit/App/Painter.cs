@@ -9,7 +9,7 @@ using Vedit.Infrastructure;
 
 namespace Vedit.App
 {
-    class Painter : IPainter
+    public class Painter : IPainter
     {
         public void Draw(Bitmap bitmap, IEnumerable<IDrawable> drawables)
         {

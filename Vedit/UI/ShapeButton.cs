@@ -6,7 +6,7 @@ using Vedit.Domain.Shapes;
 
 namespace Vedit.UI
 {
-    class ShapeButton<TShape> : IToolButton
+    public class ShapeButton<TShape> : IToolButton
         where TShape : IShape, new()
     {
         public Bitmap GetImage(Size size)

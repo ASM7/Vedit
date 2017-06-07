@@ -7,7 +7,7 @@ using Vedit.Infrastructure;
 
 namespace Vedit.App
 {
-    class Editor : IEditor
+    public class Editor : IEditor
     {
         public Document Document { get; }
         private IPainter painter;
