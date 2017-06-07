@@ -13,10 +13,7 @@ namespace Vedit.Domain.Shapes
         protected override void PaintStraight(Graphics graphics)
         {
             var pen = new Pen(Color, LineWidth);
-            graphics.DrawLine(
-                pen,
-                Position.ToDrawingPoint(),
-                (Position + new Vector(BoundingRectSize.Width, 0)).ToDrawingPoint());
+            graphics.DrawLine(pen, 0, 0, BoundingRectSize.Width, 0);
         }
     }
 }

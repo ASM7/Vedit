@@ -17,7 +17,7 @@ namespace Vedit.Domain.SelectionPrimitives
 
         protected override void PaintStraight(Graphics graphics)
         {
-            graphics.DrawRectangle(pen, this.GetBoundingRectangle());
+            graphics.DrawRectangle(pen, 0, 0, BoundingRectSize.Width, BoundingRectSize.Height);
         }
     }
 }

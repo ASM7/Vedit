@@ -6,7 +6,7 @@ namespace Vedit.Domain.SelectionPrimitives
     {
         protected override void PaintStraight(Graphics graphics)
         {
-            graphics.FillEllipse(Brushes.Blue, this.GetBoundingRectangle());
+            graphics.FillEllipse(Brushes.Blue, 0, 0, BoundingRectSize.Width, BoundingRectSize.Height);
         }
     }
 }
