@@ -2,8 +2,11 @@
 
 namespace Vedit.Infrastructure
 {
+    [Serializable]
     public class Vector
     {
+        public Vector() { }
+
         public Vector(double x, double y)
         {
             X = x;

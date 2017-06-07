@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml.Serialization;
 using Vedit.Infrastructure.Serialization;
 
 namespace Vedit.Domain.DocumentSerialization

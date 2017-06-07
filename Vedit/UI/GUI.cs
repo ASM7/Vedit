@@ -5,6 +5,8 @@ using Vedit.App;
 using Vedit.Domain;
 using Vedit.Domain.Shapes;
 using Vedit.Infrastructure;
+using Vedit.UI.MenuActions;
+
 namespace Vedit.UI
 {
     class Gui : Form, IClient
@@ -12,10 +14,10 @@ namespace Vedit.UI
         private readonly IEditor editor;
         private readonly PictureBox picture;
         private readonly ImageSettings imageSettings;
-
+        private readonly PropertyGrid propertiesPanel;
         private Vector mousePoint;
 
-        public Gui(IEditor editor, ToolPanel toolPanel, ImageSettings imageSettings)
+        public Gui(IEditor editor, ToolPanel toolPanel, ImageSettings imageSettings, IMenuAction[] menuActions)
         {
             this.editor = editor;
             this.imageSettings = imageSettings;
@@ -24,10 +26,19 @@ namespace Vedit.UI
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowOnly;
 
-            Paint += (sender, e) => RedrawPicture();
-            var layoutPanel = new TableLayoutPanel() {AutoSize = true, AutoSizeMode = AutoSizeMode.GrowOnly};
+            var menu = new MenuStrip();
+            menu.Items.AddRange(menuActions.ToMenuItems());
+            Controls.Add(menu);
 
-            picture = new PictureBox {SizeMode = PictureBoxSizeMode.AutoSize};
+            Paint += (sender, e) => RedrawPicture();
+            var layoutPanel = new TableLayoutPanel()
+                {
+                    AutoSize = true,
+                    AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                    Location = new Point(0, menu.Bottom)
+                };
+
+            picture = new PictureBox { SizeMode = PictureBoxSizeMode.AutoSize };
             InitPicture(editor.Draw(imageSettings));
 
             toolPanel.AddActionOnClick(RedrawPicture);
@@ -37,9 +48,17 @@ namespace Vedit.UI
             layoutPanel.Controls.Add(picture);
             layoutPanel.SetCellPosition(picture, new TableLayoutPanelCellPosition(1, 0));
 
-            //layoutPanel.Controls.Add(propertiesPanel);
-            //layoutPanel.SetCellPosition(picture, new TableLayoutPanelCellPosition(2, 0));
-
+            propertiesPanel = new PropertyGrid
+            {
+                Width = 300,
+                Dock = DockStyle.Fill,
+                Location = new Point(0, menu.Bottom)
+            };
+            propertiesPanel.PropertyValueChanged += (sender, e) => RedrawPicture();
+            
+            layoutPanel.Controls.Add(propertiesPanel);
+            layoutPanel.SetCellPosition(propertiesPanel, new TableLayoutPanelCellPosition(2, 0));
+            
             Controls.Add(layoutPanel);
         }
 
@@ -62,9 +81,16 @@ namespace Vedit.UI
         {
             var shape = editor.FindShape(e.Location.ToVector());
             if (shape != null)
+            {
                 editor.SelectShape(shape);
+                propertiesPanel.SelectedObject = shape;
+                propertiesPanel.Show();
+            }
             else
+            {
                 editor.ClearSelection();
+                propertiesPanel.Hide();
+            }
         }
 
         void OnPictureMouseMove(object sender, MouseEventArgs e)
@@ -77,26 +103,19 @@ namespace Vedit.UI
                 if (shape != null)
                     editor.InteractWithShape(shape, start, end);
                 Refresh();
+                propertiesPanel.Refresh();
             }
             mousePoint = end;
         }
 
         void OnCanvasMouseClick(object sender, MouseEventArgs e)
         {
-            var mouseClickPoint = new Vector(e.X, e.Y);
-
-            Refresh();
-           
+            Refresh();           
         }
 
         Bitmap GetOriginalImage()
         {
             return editor.Draw(imageSettings);
-        }
-
-        void FocusOnShape(IShape shape)
-        {
-            
         }
 
         public void Run()

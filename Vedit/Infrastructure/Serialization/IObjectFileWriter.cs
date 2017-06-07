@@ -1,8 +1,7 @@
 ﻿namespace Vedit.Infrastructure.Serialization
 {
-    public interface IObjectFileWriter<in T>
+    public interface IObjectFileWriter<in T> : IFileExtensionProvider
     {
         void WriteObject(string fileName, T obj);
-        string FileExtension { get; }
     }
 }

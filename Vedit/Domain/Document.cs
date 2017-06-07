@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Xml.Serialization;
 using Vedit.Domain.Shapes;
 using Vedit.Infrastructure;
 
@@ -16,7 +17,7 @@ namespace Vedit.Domain
             ImageSettings = imageSettings;
             Shapes = new List<IShape>();
         }
-
+        
         public List<IShape> Shapes { get; }
         public ImageSettings ImageSettings { get; }
 
