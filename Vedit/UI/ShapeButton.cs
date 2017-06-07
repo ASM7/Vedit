@@ -2,6 +2,7 @@
 using System.Drawing;
 using Vedit.App;
 using Vedit.Domain;
+using Vedit.Domain.Shapes;
 
 namespace Vedit.UI
 {

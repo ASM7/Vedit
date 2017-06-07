@@ -2,42 +2,28 @@
 using System.Collections.Generic;
 using System.Drawing;
 using Vedit.Domain;
+using Vedit.Domain.Shapes;
 using Vedit.Infrastructure;
 
 namespace Vedit.App
 {
     class Editor : IEditor
     {
-        private List<IShape> shapes;
+        public Document Document { get; }
+        private IPainter painter;
+        private HashSet<SelectedShape> selected;
 
-        public Editor()
+        public Editor(IPainter painter, Document document)
         {
-            shapes = new List<IShape>();
-        }
-
-        public IShape CreateShape<TShape>() 
-            where TShape : IShape, new()
-        {
-            var shape = new TShape();
-            shape.Position = new Vector(0, 0);
-            shapes.Add(shape);
-            return shape;
+            this.painter = painter;
+            Document = document;
+            selected = new HashSet<SelectedShape>();
         }
 
         public Bitmap Draw(ImageSettings settings)
         {
-            Console.WriteLine(shapes.Count);
             var bitmap = new Bitmap(settings.Width, settings.Height);
-            foreach (var shape in shapes)
-            {
-                var size = shape.BoundingRectSize;
-                var canvas = new Canvas {Image = new Bitmap(size.Width, size.Height)};
-                shape.Paint(canvas);
-                using (var g = Graphics.FromImage(bitmap))
-                {
-                    g.DrawImage(canvas.GetImage(), shape.Position.ToDrawingPoint());
-                }
-            }
+            painter.Draw(bitmap, Document.Shapes);
             return bitmap;
         }
 
@@ -46,9 +32,9 @@ namespace Vedit.App
             shape.Position += offset;
         }
 
-        public IShape FindShape(Vector point)
+        public void SelectShape(IShape shape)
         {
-            throw new System.NotImplementedException();
+            selected.Add(new SelectedShape(shape));
         }
     }
 }

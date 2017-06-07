@@ -6,12 +6,12 @@ namespace Vedit.Infrastructure
     {
         public static Vector ToVector(this Point point)
         {
-            return new Vector(point);
+            return new Vector(point.X, point.Y);
         }
 
         public static double DistanceTo(this Point from, Point to)
         {
-            return (new Vector(from) - new Vector(to)).Length;
+            return (from.ToVector() - to.ToVector()).Length;
         }
     }
 }

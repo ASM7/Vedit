@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Vedit.App;
 using Vedit.Domain;
+using Vedit.Domain.Shapes;
 using Vedit.Infrastructure;
 namespace Vedit.UI
 {
@@ -17,6 +18,9 @@ namespace Vedit.UI
         public Gui(IEditor editor, ToolPanel toolPanel, ImageSettings imageSettings)
         {
             this.editor = editor;
+
+            
+
             this.imageSettings = imageSettings;
 
             Text = "Vedit";
@@ -24,8 +28,8 @@ namespace Vedit.UI
             AutoSizeMode = AutoSizeMode.GrowOnly;
 
             var layoutPanel = new TableLayoutPanel() {AutoSize = true, AutoSizeMode = AutoSizeMode.GrowOnly};
-            
-            editor.CreateShape<Ellipse>();
+
+            editor.Document.CreateShape<Ellipse>();
             picture = new PictureBox {SizeMode = PictureBoxSizeMode.AutoSize};
             InitPicture(editor.Draw(imageSettings));
 
@@ -63,9 +67,11 @@ namespace Vedit.UI
 
         void OnPictureMouseMove(object sender, MouseEventArgs e)
         {
+
             if (e.Button == MouseButtons.Left)
             {
                 
+
             }
             mousePoint = e.Location.ToVector();
         }
