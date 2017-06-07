@@ -20,7 +20,7 @@ namespace Vedit.UI
 
         public void OnClick(Editor editor)
         {
-            editor.Document.Shapes.Add(new TShape());
+            editor.Document.CreateShape<TShape>();
         }
 
     }
