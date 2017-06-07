@@ -9,50 +9,85 @@ namespace Vedit.UI
     class Gui : Form, IClient
     {
         private readonly IEditor editor;
-        private readonly Canvas canvas;
+        private readonly PictureBox picture;
         private readonly ImageSettings imageSettings;
 
-        private Vector mouseDownPoint;
+        private Vector mousePoint;
 
-        public Gui(IEditor editor, Canvas canvas, ImageSettings imageSettings)
+        public Gui(IEditor editor, ToolPanel toolPanel, ImageSettings imageSettings)
         {
             this.editor = editor;
-            editor.CreateShape<Ellipse>();
-            this.canvas = canvas;
             this.imageSettings = imageSettings;
+
             Text = "Vedit";
-            //canvas.Image = new Bitmap(imageSettings.Width, imageSettings.Width);
-            canvas.Image = editor.Draw(imageSettings);
-            ClientSize = canvas.Image.Size;
-            canvas.Dock = DockStyle.Fill;
-            canvas.MouseClick += OnCanvasMouseClick;
-            canvas.MouseDown += OnCanvasMouseDown;
-            Controls.Add(canvas);
+            AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowOnly;
+
+            var layoutPanel = new TableLayoutPanel() {AutoSize = true, AutoSizeMode = AutoSizeMode.GrowOnly};
+            
+            editor.CreateShape<Ellipse>();
+            picture = new PictureBox {SizeMode = PictureBoxSizeMode.AutoSize};
+            InitPicture(editor.Draw(imageSettings));
+
+            layoutPanel.Controls.Add(toolPanel);
+            layoutPanel.SetCellPosition(picture, new TableLayoutPanelCellPosition(0, 0));
+
+            layoutPanel.Controls.Add(picture);
+            layoutPanel.SetCellPosition(picture, new TableLayoutPanelCellPosition(1, 0));
+
+            //layoutPanel.Controls.Add(propertiesPanel);
+            //layoutPanel.SetCellPosition(picture, new TableLayoutPanelCellPosition(2, 0));
+
+            Controls.Add(layoutPanel);
+        }
+
+        void InitPicture(Image image)
+        {
+            picture.Image = image;
+            picture.Dock = DockStyle.Fill;
+            picture.MouseClick += OnCanvasMouseClick;
+            picture.MouseMove += OnPictureMouseMove;
+            picture.MouseDown += OnCanvasMouseDown;
+        }
+
+        void OnPaint(object sender, PaintEventArgs e)
+        {
+            
         }
 
         void OnCanvasMouseDown(object sender, MouseEventArgs e)
         {
-            mouseDownPoint = new Vector(e.X, e.Y);
+            //var shape = editor.FindShape(e.Location.ToVector());
+            //FocusOnShape(shape);
+        }
+
+        void OnPictureMouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                
+            }
+            mousePoint = e.Location.ToVector();
         }
 
         void OnCanvasMouseClick(object sender, MouseEventArgs e)
         {
             var mouseClickPoint = new Vector(e.X, e.Y);
-            if (mouseDownPoint == null || mouseDownPoint.Equals(mouseClickPoint))
-            {
-                var shape = editor.FindShape(mouseClickPoint);
-                canvas.Image = GetOriginalImage();
-                FocusOnShape(shape);
-            }
-            else
-            {
-                var shape = editor.FindShape(mouseDownPoint);
-                var offset = mouseClickPoint - mouseDownPoint;
-                editor.MoveShape(shape, offset);
-                canvas.Image = GetOriginalImage();
-            }
+            //if (mouseDownPoint == null || mouseDownPoint.Equals(mouseClickPoint))
+            //{
+            //    var shape = editor.FindShape(mouseClickPoint);
+            //    picture.Image = GetOriginalImage();
+            //    FocusOnShape(shape);
+            //}
+            //else
+            //{
+            //    var shape = editor.FindShape(mouseDownPoint);
+            //    var offset = mouseClickPoint - mouseDownPoint;
+            //    editor.MoveShape(shape, offset);
+            //    picture.Image = GetOriginalImage();
+            //}
             Refresh();
-            mouseDownPoint = null;
+            //mouseDownPoint = null;
         }
 
         Bitmap GetOriginalImage()
