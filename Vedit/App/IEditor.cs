@@ -11,5 +11,6 @@ namespace Vedit.App
         Bitmap Draw(ImageSettings settings);
         void MoveShape(IShape shape, Vector offset);
         void SelectShape(IShape shape);
+        void ClearSelection();
     }
 }
