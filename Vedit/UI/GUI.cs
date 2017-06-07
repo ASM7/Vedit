@@ -5,6 +5,8 @@ using Vedit.App;
 using Vedit.Domain;
 using Vedit.Domain.Shapes;
 using Vedit.Infrastructure;
+using Vedit.UI.MenuActions;
+
 namespace Vedit.UI
 {
     class Gui : Form, IClient
@@ -15,7 +17,7 @@ namespace Vedit.UI
         private readonly PropertyGrid propertiesPanel;
         private Vector mousePoint;
 
-        public Gui(IEditor editor, ToolPanel toolPanel, ImageSettings imageSettings)
+        public Gui(IEditor editor, ToolPanel toolPanel, ImageSettings imageSettings, IMenuAction[] menuActions)
         {
             this.editor = editor;
             this.imageSettings = imageSettings;
@@ -24,10 +26,19 @@ namespace Vedit.UI
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowOnly;
 
-            Paint += (sender, e) => RedrawPicture();
-            var layoutPanel = new TableLayoutPanel() {AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink};
+            var menu = new MenuStrip();
+            menu.Items.AddRange(menuActions.ToMenuItems());
+            Controls.Add(menu);
 
-            picture = new PictureBox {SizeMode = PictureBoxSizeMode.AutoSize};
+            Paint += (sender, e) => RedrawPicture();
+            var layoutPanel = new TableLayoutPanel()
+                {
+                    AutoSize = true,
+                    AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                    Location = new Point(0, menu.Bottom)
+                };
+
+            picture = new PictureBox { SizeMode = PictureBoxSizeMode.AutoSize };
             InitPicture(editor.Draw(imageSettings));
 
             toolPanel.AddActionOnClick(RedrawPicture);
@@ -40,7 +51,8 @@ namespace Vedit.UI
             propertiesPanel = new PropertyGrid
             {
                 Width = 300,
-                Dock = DockStyle.Fill
+                Dock = DockStyle.Fill,
+                Location = new Point(0, menu.Bottom)
             };
             propertiesPanel.PropertyValueChanged += (sender, e) => RedrawPicture();
             

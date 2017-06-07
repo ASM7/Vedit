@@ -7,7 +7,7 @@ namespace Vedit.App
 {
     public interface IEditor
     {
-        Document Document { get; }
+        Document Document { get; set; }
         Bitmap Draw(ImageSettings settings);
         void MoveShape(IShape shape, Vector offset);
         void SelectShape(IShape shape);

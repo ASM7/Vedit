@@ -4,6 +4,7 @@ using Vedit.Infrastructure;
 
 namespace Vedit.Domain
 {
+    [Serializable]
     public abstract class DrawableObject : IDrawable
     {
         public Vector Position { get; set; } = Vector.Zero;

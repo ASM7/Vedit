@@ -9,14 +9,24 @@ namespace Vedit.App
 {
     public class Editor : IEditor
     {
-        public Document Document { get; }
+        public Document Document
+        {
+            get { return document; }
+            set
+            {
+                document = value;
+                selectedShapes.Clear();
+            }
+        }
+        private Document document;
+
         private IPainter painter;
         private HashSet<SelectedShape> selectedShapes;
 
         public Editor(IPainter painter, Document document)
         {
             this.painter = painter;
-            Document = document;
+            this.document = document;
             selectedShapes = new HashSet<SelectedShape>();
         }
 
