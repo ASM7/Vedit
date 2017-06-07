@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using Vedit.Domain;
+using Vedit.Domain.SelectionPrimitives;
 using Vedit.Domain.Shapes;
 using Vedit.Infrastructure;
 
@@ -45,24 +46,56 @@ namespace Vedit.App
 
         public void InteractWithShape(IShape shape, Vector start, Vector end)
         {
-            shape.Position += end - start;
-            //var selected = TryFindSelectedShape(shape);
-            //if (selected == null)
-            //{
-            //    shape.Position += end - start;
-            //}
-            //else
-            //{
-            //    foreach (var point in )
-            //}
+            var selected = TryFindSelectedShape(shape);
+            var delta = end - start;
+            if (selected == null)
+            {
+                shape.Position += delta;
+            }
+            else
+            {
+                var points = selected.CreatePoints();
+                var startPoint = FindKeyPoint(points, start);
+                if (startPoint != null)
+                {
+                    shape.Position += new Vector(startPoint.OffsetPositionVector.X * delta.X, startPoint.OffsetPositionVector.Y * delta.Y);
+                    shape.BoundingRectSize += new Size((int)(startPoint.OffsetSizeVector.X * delta.X), (int)(startPoint.OffsetSizeVector.Y * delta.Y));
+                }
+                else
+                {
+                    shape.Position += delta;
+                }
+            }
         }
 
         private SelectedShape TryFindSelectedShape(IShape shape)
         {
             foreach (var selectedShape in selectedShapes)
-                if (selectedShape.shape.Equals(shape))
+                if (selectedShape.shape == shape)
                     return selectedShape;
             return null;
+        }
+
+        private KeyPoint FindKeyPoint(IEnumerable<KeyPoint> keyPoints, Vector point)
+        {
+            foreach (var keyPoint in keyPoints)
+            {
+                if (keyPoint.ContainsPoint(point))
+                {
+                    return keyPoint;
+                }
+            }   
+            return null;
+        }
+
+        public IShape FindShape(Vector point)
+        {
+            foreach (var selected in selectedShapes)
+                if (FindKeyPoint(selected.CreatePoints(), point) != null)
+                {
+                    return selected.shape;
+                }
+            return Document.FindShape(point);
         }
     }
 }

@@ -18,6 +18,28 @@ namespace Vedit.App
             this.shape = shape;
         }
 
+        public List<KeyPoint> CreatePoints()
+        {
+            var points = new List<KeyPoint>();
+            for (int x = 0; x <= 2; x++)
+                for (int y = 0; y <= 2; y++)
+                {
+                    if (x == 1 && y == 1)
+                        continue;
+                    var positionVector = new Vector(Convert.ToInt32(x == 0), Convert.ToInt32(y == 0));
+                    var sizeVector = new Vector(Convert.ToInt32(x == 2), Convert.ToInt32(y == 2));
+                    if (positionVector.X == 1)
+                        sizeVector = new Vector(-1, sizeVector.Y);
+                    if (positionVector.Y == 1)
+                        sizeVector = new Vector(sizeVector.X, -1);
+                    var point = new KeyPoint(shape, positionVector, sizeVector);
+                    point.Position = new Vector(shape.Position.X + x * shape.BoundingRectSize.Width / 2, shape.Position.Y + y * shape.BoundingRectSize.Height / 2);
+                    point.BoundingRectSize = new Size(10, 10);
+                    points.Add(point);
+                }
+            return points;
+        }
+
         public readonly IShape shape;
         
         protected override void PaintStraight(Graphics graphics)
@@ -27,17 +49,8 @@ namespace Vedit.App
             frame.Angle = shape.Angle;
             frame.BoundingRectSize = shape.BoundingRectSize;
             frame.Paint(graphics);
-            for (int x = 0; x <= 2; x++)
-                for (int y = 0; y <= 2; y++)
-                {
-                    if (x == 1 && y == 1)
-                        continue;
-                    var circle = new KeyPoint();
-                    circle.Position = new Vector(shape.Position.X + x * BoundingRectSize.Width/2, shape.Position.Y + y * BoundingRectSize.Height/2);
-                    circle.BoundingRectSize = new Size(5, 5);
-                    circle.Paint(graphics);
-                }
-
+            foreach (var point in CreatePoints())
+                point.Paint(graphics);
         }
     }
 }

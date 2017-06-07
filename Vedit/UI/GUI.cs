@@ -60,10 +60,11 @@ namespace Vedit.UI
 
         void OnCanvasMouseDown(object sender, MouseEventArgs e)
         {
-            editor.ClearSelection();
-            var shape = editor.Document.FindShape(e.Location.ToVector());
+            var shape = editor.FindShape(e.Location.ToVector());
             if (shape != null)
                 editor.SelectShape(shape);
+            else
+                editor.ClearSelection();
         }
 
         void OnPictureMouseMove(object sender, MouseEventArgs e)
@@ -72,7 +73,7 @@ namespace Vedit.UI
             var end = e.Location.ToVector();
             if (e.Button == MouseButtons.Left)
             {
-                var shape = editor.Document.FindShape(start);
+                var shape = editor.FindShape(start);
                 if (shape != null)
                     editor.InteractWithShape(shape, start, end);
                 Refresh();
