@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 
 namespace Vedit.Infrastructure
 {
@@ -9,10 +8,6 @@ namespace Vedit.Infrastructure
         {
             X = x;
             Y = y;
-        }
-
-        public Vector(Point p) : this(p.X, p.Y)
-        {
         }
 
         public readonly double X;
@@ -65,11 +60,6 @@ namespace Vedit.Infrastructure
         public static Vector operator +(Vector a, Vector b)
         {
             return new Vector(a.X + b.X, a.Y + b.Y);
-        }
-
-        public Point ToDrawingPoint()
-        {
-            return new Point((int) X, (int) Y);
         }
     }
 }

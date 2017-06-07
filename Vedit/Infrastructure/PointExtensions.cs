@@ -6,7 +6,7 @@ namespace Vedit.Infrastructure
     {
         public static Vector ToVector(this Point point)
         {
-            return new Vector(point);
+            return new Vector(point.X, point.Y);
         }
 
         public static double DistanceTo(this Point from, Point to)
