@@ -7,8 +7,8 @@ namespace Vedit.Domain.Shapes
     [Serializable]
     public class Segment: DrawableObject, IShape
     {
-        public float LineWidth { get; set; }
-        public Color Color { get; set; }
+        public float LineWidth { get; set; } = 10;
+        public Color Color { get; set; } = Color.Black;
         
         protected override void PaintStraight(Graphics graphics)
         {
@@ -16,7 +16,7 @@ namespace Vedit.Domain.Shapes
             graphics.DrawLine(
                 pen,
                 Position.ToDrawingPoint(),
-                (Position + new Vector(0, BoundingRectSize.Width)).ToDrawingPoint());
+                (Position + new Vector(BoundingRectSize.Width, 0)).ToDrawingPoint());
         }
     }
 }
