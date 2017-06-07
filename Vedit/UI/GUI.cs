@@ -75,6 +75,7 @@ namespace Vedit.UI
                 var shape = editor.Document.FindShape(start);
                 if (shape != null)
                     editor.InteractWithShape(shape, start, end);
+                Refresh();
             }
             mousePoint = end;
         }
