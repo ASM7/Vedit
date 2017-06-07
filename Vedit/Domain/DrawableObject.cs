@@ -12,23 +12,21 @@ namespace Vedit.Domain
 
         public void Paint(Bitmap bitmap)
         {
-            Paint(Graphics.FromImage(bitmap));
+            using (var graphics = Graphics.FromImage(bitmap))
+                Paint(graphics);
         }
 
         public void Paint(Graphics graphics)
         {
-            using (graphics)
-            {
-                graphics.TranslateTransform(Position);
+            graphics.TranslateTransform(Position);
 
-                var centerOffset = new Vector(BoundingRectSize.Width, BoundingRectSize.Height) * 0.5;
-                graphics.TranslateTransform(centerOffset);
-                graphics.RotateTransform(Angle);
-                graphics.TranslateTransform(-1 * centerOffset);
+            var centerOffset = new Vector(BoundingRectSize.Width, BoundingRectSize.Height) * 0.5;
+            graphics.TranslateTransform(centerOffset);
+            graphics.RotateTransform(Angle);
+            graphics.TranslateTransform(-1 * centerOffset);
 
-                PaintStraight(graphics);
-                graphics.ResetTransform();
-            }
+            PaintStraight(graphics);
+            graphics.ResetTransform();
         }
 
         protected abstract void PaintStraight(Graphics graphics);
