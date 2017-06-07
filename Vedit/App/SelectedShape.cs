@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vedit.Domain;
+using Vedit.Domain.Shapes;
 using Vedit.Infrastructure;
 
 namespace Vedit.App
