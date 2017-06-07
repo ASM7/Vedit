@@ -10,7 +10,7 @@ namespace Vedit.Domain.SelectionPrimitives
 
         static SelectionFrame()
         {
-            pen = Pens.Black;
+            pen = new Pen(Color.Black);
             pen.DashPattern = new[] {2f};
             pen.DashStyle = DashStyle.Dash;
         }
