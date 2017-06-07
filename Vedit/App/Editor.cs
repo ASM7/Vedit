@@ -37,5 +37,10 @@ namespace Vedit.App
         {
             selected.Add(new SelectedShape(shape));
         }
+
+        public void ClearSelection()
+        {
+            selected = new HashSet<SelectedShape>();
+        }
     }
 }
