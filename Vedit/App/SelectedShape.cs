@@ -33,7 +33,7 @@ namespace Vedit.App
                     if (positionVector.Y == 1)
                         sizeVector = new Vector(sizeVector.X, -1);
                     var point = new KeyPoint(positionVector, sizeVector);
-                    point.Position = new Vector(offset.X + x * shape.BoundingRectSize.Width / 2,offset.Y+ y * shape.BoundingRectSize.Height / 2);
+                    point.Position = offset + new Vector(x * shape.BoundingRectSize.Width / 2, y * shape.BoundingRectSize.Height / 2);
                     points.Add(point);
                 }
             return points;
