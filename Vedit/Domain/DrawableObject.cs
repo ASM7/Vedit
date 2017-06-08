@@ -28,7 +28,6 @@ namespace Vedit.Domain
 
             PaintStraight(graphics);
 
-
             graphics.TranslateTransform(centerOffset);
             graphics.RotateTransform(-Angle);
             graphics.TranslateTransform(-1 * centerOffset);
