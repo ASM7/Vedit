@@ -11,7 +11,7 @@ namespace Vedit.Domain
         public Size BoundingRectSize { get; set; } = new Size(100, 100);
         public float Angle { get; set; }
 
-        public void Paint(Bitmap bitmap)
+        public virtual void Paint(Bitmap bitmap)
         {
             using (var graphics = Graphics.FromImage(bitmap))
                 Paint(graphics);
