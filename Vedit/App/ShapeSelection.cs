@@ -34,7 +34,7 @@ namespace Vedit.App
                         sizeVector = new Vector(sizeVector.X, -1);
                     var point = new KeyPoint(positionVector, sizeVector);
                     var offsetToPointCenter = point.BoundingRectSize.OffsetToCenter();
-                    point.Position = offset + new Vector(x, y).CoordinateMultipliply(shape.BoundingRectSize.OffsetToCenter()) - offsetToPointCenter;
+                    point.Position = offset + new Vector(x, y).CoordinateMultiply(shape.BoundingRectSize.OffsetToCenter()) - offsetToPointCenter;
                     points.Add(point);
                 }
             return points;

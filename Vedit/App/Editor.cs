@@ -71,8 +71,8 @@ namespace Vedit.App
             var startPoint = clickContext.KeyPoint;
             if (startPoint != null)
             {
-                shape.Position += startPoint.OffsetPositionVector.CoordinateMultipliply(offset);
-                shape.BoundingRectSize += startPoint.OffsetSizeVector.CoordinateMultipliply(offset).ToIntegerSize();
+                shape.Position += startPoint.OffsetPositionVector.CoordinateMultiply(offset);
+                shape.BoundingRectSize += startPoint.OffsetSizeVector.CoordinateMultiply(offset).ToIntegerSize();
             }
             else
             {
