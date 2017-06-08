@@ -18,7 +18,7 @@ namespace Vedit.App
             this.shape = shape;
         }
 
-        public List<KeyPoint> CreatePoints()
+        public List<KeyPoint> CreatePoints(Vector offset)
         {
             var points = new List<KeyPoint>();
             for (int x = 0; x <= 2; x++)
@@ -32,9 +32,8 @@ namespace Vedit.App
                         sizeVector = new Vector(-1, sizeVector.Y);
                     if (positionVector.Y == 1)
                         sizeVector = new Vector(sizeVector.X, -1);
-                    var point = new KeyPoint(shape, positionVector, sizeVector);
-                    point.Position = new Vector(x * shape.BoundingRectSize.Width / 2, y * shape.BoundingRectSize.Height / 2);
-                    point.BoundingRectSize = new Size(10, 10);
+                    var point = new KeyPoint(positionVector, sizeVector);
+                    point.Position = new Vector(offset.X + x * shape.BoundingRectSize.Width / 2,offset.Y+ y * shape.BoundingRectSize.Height / 2);
                     points.Add(point);
                 }
             return points;
@@ -46,7 +45,7 @@ namespace Vedit.App
         {
             Angle = shape.Angle;
             Position = shape.Position;
-            foreach (var point in CreatePoints())
+            foreach (var point in CreatePoints(Vector.Zero))
                 point.Paint(graphics);
             var frame = new SelectionFrame();
             frame.BoundingRectSize = shape.BoundingRectSize;

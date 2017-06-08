@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Xml.Serialization;
 using Vedit.Domain.Shapes;
 using Vedit.Infrastructure;
@@ -31,7 +32,8 @@ namespace Vedit.Domain
 
         public IShape FindShape(Vector point)
         {
-            return Shapes.Find(s => s.ContainsPoint(point));
+            var reversed = Shapes.TakeWhile(_ => true).Reverse().ToList();
+            return reversed.Find(s => s.ContainsPoint(point));
         }
     }
 }

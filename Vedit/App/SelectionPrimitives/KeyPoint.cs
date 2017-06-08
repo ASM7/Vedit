@@ -10,9 +10,9 @@ namespace Vedit.App.SelectionPrimitives
         public readonly Vector OffsetPositionVector;
         public readonly Vector OffsetSizeVector;
 
-        public KeyPoint(IShape parentShape, Vector offsetPositionVector, Vector offsetSizeVector)
-            :base()
+        public KeyPoint(Vector offsetPositionVector, Vector offsetSizeVector)
         {
+            BoundingRectSize = new Size(10, 10);
             OffsetPositionVector = offsetPositionVector;
             OffsetSizeVector = offsetSizeVector;
         }

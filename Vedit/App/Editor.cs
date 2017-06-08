@@ -85,9 +85,9 @@ namespace Vedit.App
 
         public ClickContext FindShape(Vector point)
         {
-            foreach (var selected in selectedShapes)
+            foreach (var selected in selectedShapes.Reverse())
             {
-                var keyPoint = FindKeyPoint(selected.CreatePoints(), point);
+                var keyPoint = FindKeyPoint(selected.CreatePoints(selected.shape.Position), point);
                 if (keyPoint != null)
                 {
                     return new ClickContext(selected.shape, keyPoint);
