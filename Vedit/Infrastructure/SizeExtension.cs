@@ -13,5 +13,10 @@ namespace Vedit.Infrastructure
         {
             return new Size(Math.Abs(size.Width), Math.Abs(size.Height));
         }
+
+        public static Vector OffsetToCenter(this Size size)
+        {
+            return new Vector(size.Width / 2.0, size.Height / 2.0);
+        }
     }
 }
