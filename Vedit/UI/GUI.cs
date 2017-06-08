@@ -21,55 +21,68 @@ namespace Vedit.UI
         {
             this.editor = editor;
             this.imageSettings = imageSettings;
-
-            Text = "Vedit";
-            AutoSize = true;
-            AutoSizeMode = AutoSizeMode.GrowOnly;
-
-            var menu = new MenuStrip();
-            menu.Items.AddRange(menuActions.ToMenuItems());
-            Controls.Add(menu);
-
-            Paint += (sender, e) => RedrawPicture();
-            var layoutPanel = new TableLayoutPanel()
-                {
-                    AutoSize = true,
-                    AutoSizeMode = AutoSizeMode.GrowAndShrink,
-                    Location = new Point(0, menu.Bottom)
-                };
-
-            picture = new PictureBox { SizeMode = PictureBoxSizeMode.AutoSize };
-            InitPicture(editor.Draw(imageSettings));
-
+            InitializeComponent();
+            var menu = CreateMenu(menuActions.ToMenuItems());
+            picture = CreatePictureBox(editor.Draw(imageSettings));
             toolPanel.AddActionOnClick(RedrawPicture);
-            layoutPanel.Controls.Add(toolPanel);
-            layoutPanel.SetCellPosition(picture, new TableLayoutPanelCellPosition(0, 0));
-
-            layoutPanel.Controls.Add(picture);
-            layoutPanel.SetCellPosition(picture, new TableLayoutPanelCellPosition(1, 0));
-
-            propertiesPanel = new PropertyGrid
-            {
-                Width = 300,
-                Dock = DockStyle.Fill,
-                Location = new Point(0, menu.Bottom)
-            };
-            propertiesPanel.PropertyValueChanged += (sender, e) => RedrawPicture();
-            
-            layoutPanel.Controls.Add(propertiesPanel);
-            layoutPanel.SetCellPosition(propertiesPanel, new TableLayoutPanelCellPosition(2, 0));
-            
+            propertiesPanel = CreatePropertyPanel();
+            var layoutPanel = CreateLayoutPanel(new Control[] {toolPanel, picture, propertiesPanel});
+            layoutPanel.Location = new Point(0, menu.Bottom);
+            Controls.Add(menu);
             Controls.Add(layoutPanel);
         }
 
-        void InitPicture(Image image)
+        private TableLayoutPanel CreateLayoutPanel(Control[] controls)
         {
-            picture.Image = image;
-            picture.Dock = DockStyle.Fill;
-            picture.MouseClick += OnCanvasMouseClick;
-            picture.MouseMove += OnPictureMouseMove;
-            picture.MouseDown += OnCanvasMouseDown;
-            picture.MouseUp += OnCanvasMouseUp;
+            var layoutPanel = new TableLayoutPanel()
+            {
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink
+            };
+            for (int i = 0; i < controls.Length; i++)
+            {
+                layoutPanel.Controls.Add(controls[i]);
+                layoutPanel.SetCellPosition(controls[i], new TableLayoutPanelCellPosition(i, 0));
+            }
+            return layoutPanel;
+        }
+
+        private void InitializeComponent()
+        {
+            Text = "Vedit";
+            AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowOnly;
+            Paint += (sender, e) => RedrawPicture();
+        }
+
+        PropertyGrid CreatePropertyPanel()
+        {
+            var panel = new PropertyGrid
+            {
+                Width = 300,
+                Dock = DockStyle.Fill
+            };
+            panel.PropertyValueChanged += (sender, e) => RedrawPicture();
+            return panel;
+        }
+
+        MenuStrip CreateMenu(ToolStripItem[] menuItems)
+        {
+            var menu = new MenuStrip();
+            menu.Items.AddRange(menuItems);
+            return menu;
+        }
+
+        PictureBox CreatePictureBox(Image image)
+        {
+            var pictureBox = new PictureBox { SizeMode = PictureBoxSizeMode.AutoSize };
+            pictureBox.Image = image;
+            pictureBox.Dock = DockStyle.Fill;
+            pictureBox.MouseClick += OnCanvasMouseClick;
+            pictureBox.MouseMove += OnPictureMouseMove;
+            pictureBox.MouseDown += OnCanvasMouseDown;
+            pictureBox.MouseUp += OnCanvasMouseUp;
+            return pictureBox;
         }
 
         private void OnCanvasMouseUp(object sender, MouseEventArgs e)
