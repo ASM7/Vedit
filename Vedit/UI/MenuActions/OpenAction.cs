@@ -8,15 +8,15 @@ using Vedit.Infrastructure.Serialization;
 
 namespace Vedit.UI.MenuActions
 {
-    public class OpenAction : OpenSaveAction<IObjectFileReader<Document>, OpenFileDialog>
+    public class OpenAction : FileNameAction<IDeserializer<Document>, OpenFileDialog>
     {
         public override string Name => "Открыть";
 
-        public OpenAction(IEditor editor, IObjectFileReader<Document>[] operators) : base(editor, operators)
+        public OpenAction(IEditor editor, IDeserializer<Document>[] operators) : base(editor, operators)
         {
         }
 
-        protected override void MakeOperation(string fileName, IObjectFileReader<Document> fileOperator)
+        protected override void MakeOperation(string fileName, IDeserializer<Document> fileOperator)
         {
             editor.Document = fileOperator.ReadObject(fileName);
         }

@@ -8,17 +8,16 @@ using Vedit.Infrastructure.Serialization;
 
 namespace Vedit.UI.MenuActions
 {
-    public abstract class OpenSaveAction<TFileOperator, TDialog> : IMenuAction
-        where TFileOperator: IFileExtensionProvider
+    public abstract class FileNameAction<TFileOperator, TDialog> : IMenuAction
         where TDialog: FileDialog, IDisposable, new ()
     {
-        private readonly TFileOperator[] operators;
         protected readonly IEditor editor;
+        private readonly IFileTypeProvider[] operators;
 
-        public OpenSaveAction(IEditor editor, TFileOperator[] operators)
+        public FileNameAction(IEditor editor, TFileOperator[] operators)
         {
             this.editor = editor;
-            this.operators = operators;
+            this.operators = operators.Where(op => op is IFileTypeProvider).Cast<IFileTypeProvider>().ToArray();
         }
 
         public string Category => "Файл";
@@ -28,13 +27,13 @@ namespace Vedit.UI.MenuActions
         {
             using (var dialog = new TDialog())
             {
-                dialog.Filter = operators.Cast<IFileExtensionProvider>().BuildDialogFilterString();
+                dialog.Filter = operators.BuildDialogFilterString();
                 if (dialog.ShowDialog() != DialogResult.OK) return;
-                var fileExt = Path.GetExtension(dialog.FileName).Substring(1);
+                var fileExt = Path.GetExtension(dialog.FileName);
                 var fileOperator = operators.FirstOrDefault(w => w.FileExtension == fileExt);
                 if (fileOperator == null)
                     return;
-                MakeOperation(dialog.FileName, fileOperator);
+                MakeOperation(dialog.FileName, (TFileOperator)fileOperator);
             }
         }
 

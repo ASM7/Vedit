@@ -1,7 +1,8 @@
 ﻿namespace Vedit.Infrastructure.Serialization
 {
-    public interface IFileExtensionProvider
+    public interface IFileTypeProvider
     {
         string FileExtension { get; }
+        string TypeDescription { get; }
     }
 }

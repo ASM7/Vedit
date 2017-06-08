@@ -5,18 +5,13 @@ using Vedit.Infrastructure.Serialization;
 
 namespace Vedit.Domain.DocumentSerialization
 {
-    public class BinaryDocumentSerializer : ObjectSerializer<Document>
+    public class BinaryDocumentSerializer : BinarySerializer<Document>, IFileTypeProvider
     {
-        private readonly BinaryFormatter formatter;
+        public string FileExtension => ".bin";
+        public string TypeDescription => "Binary vector graphics";
 
-        public BinaryDocumentSerializer(string fileExtension, BinaryFormatter formatter) : base(fileExtension)
+        public BinaryDocumentSerializer(BinaryFormatter formatter) : base(formatter)
         {
-            this.formatter = formatter;
-        }
-
-        public override void Serialize(Stream stream, Document obj)
-        {
-            formatter.Serialize(stream, obj);
         }
     }
 }
