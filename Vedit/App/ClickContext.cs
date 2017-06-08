@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Vedit.Domain.SelectionPrimitives;
+using Vedit.App.SelectionPrimitives;
 using Vedit.Domain.Shapes;
 
 namespace Vedit.App

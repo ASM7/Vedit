@@ -65,9 +65,9 @@
     <Compile Include="Domain\DocumentSerialization\BitmapRenderer.cs" />
     <Compile Include="Domain\IPainter.cs" />
     <Compile Include="Domain\Painter.cs" />
-    <Compile Include="Domain\SelectionPrimitives\ISelectionPrimitive.cs" />
-    <Compile Include="Domain\SelectionPrimitives\KeyPoint.cs" />
-    <Compile Include="Domain\SelectionPrimitives\SelectionFrame.cs" />
+    <Compile Include="App\SelectionPrimitives\ISelectionPrimitive.cs" />
+    <Compile Include="App\SelectionPrimitives\KeyPoint.cs" />
+    <Compile Include="App\SelectionPrimitives\SelectionFrame.cs" />
     <Compile Include="Infrastructure\Serialization\IDeserializer.cs" />
     <Compile Include="Infrastructure\Serialization\ISerializer.cs" />
     <Compile Include="Infrastructure\Serialization\BinarySerializer.cs" />
@@ -80,7 +80,7 @@
     <Compile Include="Infrastructure\ImageSettings.cs" />
     <Compile Include="Infrastructure\Serialization\SerializationExtensions.cs" />
     <Compile Include="Infrastructure\VectorExtensions.cs" />
-    <Compile Include="UI\EllipseButton.cs" />
+    <Compile Include="UI\ToolButtons\EllipseButton.cs" />
     <Compile Include="UI\Gui.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,11 +97,11 @@
     <Compile Include="UI\MenuActions\SaveAction.cs" />
     <Compile Include="UI\MenuActions\FileTypeProviderExtensions.cs" />
     <Compile Include="UI\MenuActions\IMenuAction.cs" />
-    <Compile Include="UI\IToolButton.cs" />
+    <Compile Include="UI\ToolButtons\IToolButton.cs" />
     <Compile Include="UI\MenuActions\OpenAction.cs" />
     <Compile Include="UI\MenuActions\FileNameAction.cs" />
-    <Compile Include="UI\SegmentButton.cs" />
-    <Compile Include="UI\ShapeButton.cs" />
+    <Compile Include="UI\ToolButtons\SegmentButton.cs" />
+    <Compile Include="UI\ToolButtons\ShapeButton.cs" />
     <Compile Include="UI\ToolPanel.cs">
       <SubType>Component</SubType>
     </Compile>

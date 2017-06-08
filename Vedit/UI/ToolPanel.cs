@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vedit.App;
 using Vedit.Infrastructure;
+using Vedit.UI.ToolButtons;
 
 namespace Vedit.UI
 {

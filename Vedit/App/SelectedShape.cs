@@ -4,8 +4,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vedit.App.SelectionPrimitives;
 using Vedit.Domain;
-using Vedit.Domain.SelectionPrimitives;
 using Vedit.Domain.Shapes;
 using Vedit.Infrastructure;
 

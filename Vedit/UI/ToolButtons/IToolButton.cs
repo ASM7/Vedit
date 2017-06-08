@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using Vedit.App;
 
-namespace Vedit.UI
+namespace Vedit.UI.ToolButtons
 {
     internal interface IToolButton
     {

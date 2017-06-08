@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
 using System.Drawing.Drawing2D;
-using Vedit.Infrastructure;
+using Vedit.Domain;
 
-namespace Vedit.Domain.SelectionPrimitives
+namespace Vedit.App.SelectionPrimitives
 {
     public class SelectionFrame: DrawableObject, ISelectionPrimitive
     {

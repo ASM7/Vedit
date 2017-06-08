@@ -7,6 +7,8 @@ using Vedit.Domain;
 using Vedit.Infrastructure;
 using Vedit.Infrastructure.Serialization;
 using Vedit.UI;
+using Vedit.UI.MenuActions;
+using Vedit.UI.ToolButtons;
 
 namespace Vedit
 {

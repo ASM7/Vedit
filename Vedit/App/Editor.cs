@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using Vedit.App.SelectionPrimitives;
 using Vedit.Domain;
-using Vedit.Domain.SelectionPrimitives;
 using Vedit.Domain.Shapes;
 using Vedit.Infrastructure;
 
