@@ -32,8 +32,7 @@ namespace Vedit.Domain
 
         public IShape FindShape(Vector point)
         {
-            var reversed = Shapes.TakeWhile(_ => true).Reverse().ToList();
-            return reversed.Find(s => s.ContainsPoint(point));
+            return Shapes.LastOrDefault(s => s.ContainsPoint(point));
         }
     }
 }
