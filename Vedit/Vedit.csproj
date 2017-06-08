@@ -83,7 +83,6 @@
     <Compile Include="Infrastructure\ImageSettings.cs" />
     <Compile Include="Infrastructure\Serialization\SerializationExtensions.cs" />
     <Compile Include="Infrastructure\VectorExtensions.cs" />
-    <Compile Include="UI\ToolButtons\EllipseButton.cs" />
     <Compile Include="UI\Gui.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,7 +102,6 @@
     <Compile Include="UI\ToolButtons\IToolButton.cs" />
     <Compile Include="UI\MenuActions\OpenAction.cs" />
     <Compile Include="UI\MenuActions\FileNameAction.cs" />
-    <Compile Include="UI\ToolButtons\SegmentButton.cs" />
     <Compile Include="UI\ToolButtons\ShapeButton.cs" />
     <Compile Include="UI\ToolPanel.cs">
       <SubType>Component</SubType>
