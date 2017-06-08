@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Drawing;
-using Vedit.Infrastructure;
 
 namespace Vedit.Domain.Shapes
 {
     [Serializable]
     public class Ellipse : DrawableObject, IShape
     {
-        public float LineWidth { get; set; } = 7;
-        public Color LineColor { get; set; } = Color.DeepPink;
-        public Color FillColor { get; set; } = Color.CornflowerBlue;
+        public float LineWidth { get; set; } = 1;
+        public Color LineColor { get; set; } = Color.Black;
+        public Color FillColor { get; set; } = Color.DodgerBlue;
         
         protected override void PaintStraight(Graphics graphics)
         {
