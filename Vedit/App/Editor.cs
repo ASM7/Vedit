@@ -84,6 +84,12 @@ namespace Vedit.App
             return keyPoints.FirstOrDefault(keyPoint => keyPoint.ContainsPoint(parent, point));
         }
 
+        public void RemoveShape(IShape shape)
+        {
+            document.Shapes.Remove(shape);
+            selectedShapes.RemoveWhere(s => s.shape == shape);
+        }
+
         public ClickContext FindShape(Vector point)
         {
             foreach (var selected in selectedShapes.Reverse())
