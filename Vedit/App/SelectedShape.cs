@@ -45,6 +45,7 @@ namespace Vedit.App
         {
             Angle = shape.Angle;
             Position = shape.Position;
+            BoundingRectSize = shape.BoundingRectSize;
             foreach (var point in CreatePoints(Vector.Zero))
                 point.Paint(graphics);
             var frame = new SelectionFrame();

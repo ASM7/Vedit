@@ -71,6 +71,7 @@
     <Compile Include="App\SelectionPrimitives\ISelectionPrimitive.cs" />
     <Compile Include="App\SelectionPrimitives\KeyPoint.cs" />
     <Compile Include="App\SelectionPrimitives\SelectionFrame.cs" />
+    <Compile Include="Infrastructure\FloatExtensions.cs" />
     <Compile Include="Infrastructure\Serialization\IDeserializer.cs" />
     <Compile Include="Infrastructure\Serialization\ISerializer.cs" />
     <Compile Include="Infrastructure\Serialization\BinarySerializer.cs" />
