@@ -98,7 +98,7 @@ namespace Vedit.App
             return new ClickContext(Document.FindShape(point), null);
         }
 
-        public void FixSize(IShape shape)
+        public void InvertNegativeSize(IShape shape)
         {
             if (shape.BoundingRectSize.Width < 0)
                 shape.Position += new Vector(shape.BoundingRectSize.Width, 0);
