@@ -7,6 +7,8 @@ using Vedit.Domain;
 using Vedit.Infrastructure;
 using Vedit.Infrastructure.Serialization;
 using Vedit.UI;
+using Vedit.UI.MenuActions;
+using Vedit.UI.ToolButtons;
 
 namespace Vedit
 {
@@ -22,7 +24,7 @@ namespace Vedit
         {
             var kernel = new StandardKernel();
             kernel.Bind<IClient>().To<Gui>().InSingletonScope();
-            kernel.Bind<IEditor>().To<Editor>().InSingletonScope();
+            kernel.Bind<Editor>().ToSelf().InSingletonScope();
             kernel.Bind<IPainter>().To<Painter>();
             kernel.Bind<ImageSettings>().ToConstant(new ImageSettings {Width = 500, Height = 500}).InSingletonScope();
             kernel.Bind(c => c.FromThisAssembly()

@@ -1,4 +1,6 @@
-﻿namespace Vedit.Domain.SelectionPrimitives
+﻿using Vedit.Domain;
+
+namespace Vedit.App.SelectionPrimitives
 {
     public interface ISelectionPrimitive : IDrawable
     {

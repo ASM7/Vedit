@@ -1,10 +1,8 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using Vedit.App;
-using Vedit.Domain;
 using Vedit.Domain.Shapes;
 
-namespace Vedit.UI
+namespace Vedit.UI.ToolButtons
 {
     public class ShapeButton<TShape> : IToolButton
         where TShape : IShape, new()
@@ -18,7 +16,7 @@ namespace Vedit.UI
             return result;
         }
 
-        public void OnClick(IEditor editor)
+        public void OnClick(Editor editor)
         {
             editor.Document.CreateShape<TShape>();
         }

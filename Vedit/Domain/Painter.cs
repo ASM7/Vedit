@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Vedit.Domain;
-using Vedit.Infrastructure;
+using Vedit.App;
 
-namespace Vedit.App
+namespace Vedit.Domain
 {
     public class Painter : IPainter
     {

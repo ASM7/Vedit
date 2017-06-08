@@ -12,7 +12,7 @@ namespace Vedit.UI.MenuActions
     {
         public override string Name => "Открыть";
 
-        public OpenAction(IEditor editor, IDeserializer<Document>[] operators) : base(editor, operators)
+        public OpenAction(Editor editor, IDeserializer<Document>[] operators) : base(editor, operators)
         {
         }
 

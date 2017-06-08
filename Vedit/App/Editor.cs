@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using Vedit.App.SelectionPrimitives;
 using Vedit.Domain;
-using Vedit.Domain.SelectionPrimitives;
 using Vedit.Domain.Shapes;
 using Vedit.Infrastructure;
 
 namespace Vedit.App
 {
-    public class Editor : IEditor
+    public class Editor
     {
         public Document Document
         {
@@ -38,11 +38,6 @@ namespace Vedit.App
             painter.Draw(bitmap, Document.Shapes);
             painter.Draw(bitmap, selectedShapes);
             return bitmap;
-        }
-
-        public void MoveShape(IShape shape, Vector offset)
-        {
-            shape.Position += offset;
         }
 
         public void SelectShape(IShape shape)

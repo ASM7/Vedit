@@ -1,4 +1,4 @@
-﻿namespace Vedit.UI
+﻿namespace Vedit.UI.MenuActions
 {
     public interface IMenuAction
     {

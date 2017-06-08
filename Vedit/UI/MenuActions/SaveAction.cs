@@ -7,7 +7,7 @@ namespace Vedit.UI.MenuActions
 {
     public class SaveAction : FileNameAction<ISerializer<Document>, SaveFileDialog>
     {
-        public SaveAction(IEditor editor, ISerializer<Document>[] operators) : base(editor, operators)
+        public SaveAction(Editor editor, ISerializer<Document>[] operators) : base(editor, operators)
         {
         }
 
