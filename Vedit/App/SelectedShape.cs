@@ -33,7 +33,7 @@ namespace Vedit.App
                     if (positionVector.Y == 1)
                         sizeVector = new Vector(sizeVector.X, -1);
                     var point = new KeyPoint(shape, positionVector, sizeVector);
-                    point.Position = new Vector(shape.Position.X + x * shape.BoundingRectSize.Width / 2, shape.Position.Y + y * shape.BoundingRectSize.Height / 2);
+                    point.Position = new Vector(x * shape.BoundingRectSize.Width / 2, y * shape.BoundingRectSize.Height / 2);
                     point.BoundingRectSize = new Size(10, 10);
                     points.Add(point);
                 }
@@ -44,13 +44,13 @@ namespace Vedit.App
         
         protected override void PaintStraight(Graphics graphics)
         {
-            var frame = new SelectionFrame();
-            frame.Position = shape.Position;
-            frame.Angle = shape.Angle;
-            frame.BoundingRectSize = shape.BoundingRectSize;
-            frame.Paint(graphics);
+            Angle = shape.Angle;
+            Position = shape.Position;
             foreach (var point in CreatePoints())
                 point.Paint(graphics);
+            var frame = new SelectionFrame();
+            frame.BoundingRectSize = shape.BoundingRectSize;
+            frame.Paint(graphics);
         }
     }
 }
