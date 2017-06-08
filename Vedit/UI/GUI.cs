@@ -11,13 +11,13 @@ namespace Vedit.UI
 {
     class Gui : Form, IClient
     {
-        private readonly IEditor editor;
+        private readonly Editor editor;
         private readonly PictureBox picture;
         private readonly ImageSettings imageSettings;
         private readonly PropertyGrid propertiesPanel;
         private Vector mousePoint;
 
-        public Gui(IEditor editor, ToolPanel toolPanel, ImageSettings imageSettings, IMenuAction[] menuActions)
+        public Gui(Editor editor, ToolPanel toolPanel, ImageSettings imageSettings, IMenuAction[] menuActions)
         {
             this.editor = editor;
             this.imageSettings = imageSettings;

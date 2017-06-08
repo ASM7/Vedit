@@ -11,7 +11,7 @@ namespace Vedit.UI
 {
     class ToolPanel : TableLayoutPanel
     {
-        public ToolPanel(IToolButton[] toolButtons, IEditor editor, ToolPanelSettings settings)
+        public ToolPanel(IToolButton[] toolButtons, Editor editor, ToolPanelSettings settings)
         {
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowOnly;

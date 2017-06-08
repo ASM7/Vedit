@@ -11,10 +11,10 @@ namespace Vedit.UI.MenuActions
     public abstract class FileNameAction<TFileOperator, TDialog> : IMenuAction
         where TDialog: FileDialog, IDisposable, new ()
     {
-        protected readonly IEditor editor;
+        protected readonly Editor editor;
         private readonly IFileTypeProvider[] operators;
 
-        public FileNameAction(IEditor editor, TFileOperator[] operators)
+        public FileNameAction(Editor editor, TFileOperator[] operators)
         {
             this.editor = editor;
             this.operators = operators.Where(op => op is IFileTypeProvider).Cast<IFileTypeProvider>().ToArray();

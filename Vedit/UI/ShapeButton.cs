@@ -18,7 +18,7 @@ namespace Vedit.UI
             return result;
         }
 
-        public void OnClick(IEditor editor)
+        public void OnClick(Editor editor)
         {
             editor.Document.CreateShape<TShape>();
         }

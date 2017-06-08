@@ -86,7 +86,6 @@
     </Compile>
     <Compile Include="UI\IClient.cs" />
     <Compile Include="App\Editor.cs" />
-    <Compile Include="App\IEditor.cs" />
     <Compile Include="Domain\Shapes\Ellipse.cs" />
     <Compile Include="Domain\Shapes\Segment.cs" />
     <Compile Include="Domain\Shapes\IShape.cs" />
