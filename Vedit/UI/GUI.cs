@@ -75,7 +75,7 @@ namespace Vedit.UI
         private void OnCanvasMouseUp(object sender, MouseEventArgs e)
         {
             if (currentClickContext.Shape != null)
-                editor.FixSize(currentClickContext.Shape);
+                editor.InvertNegativeSize(currentClickContext.Shape);
         }
 
         void RedrawPicture()

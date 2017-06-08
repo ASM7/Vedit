@@ -61,16 +61,22 @@ namespace Vedit.App
             }
             else
             {
-                var startPoint = clickContext.KeyPoint;
-                if (startPoint != null)
-                {
-                    shape.Position += new Vector(startPoint.OffsetPositionVector.X * offset.X, startPoint.OffsetPositionVector.Y * offset.Y);
-                    shape.BoundingRectSize += new Size((int)(startPoint.OffsetSizeVector.X * offset.X), (int)(startPoint.OffsetSizeVector.Y * offset.Y));
-                }
-                else
-                {
-                    shape.Position += offset;
-                }
+                InteractWithSelected(clickContext, offset);
+            }
+        }
+
+        private void InteractWithSelected(ClickContext clickContext, Vector offset)
+        {
+            var shape = clickContext.Shape;
+            var startPoint = clickContext.KeyPoint;
+            if (startPoint != null)
+            {
+                shape.Position += startPoint.OffsetPositionVector.CoordinateMultipliply(offset);
+                shape.BoundingRectSize += startPoint.OffsetSizeVector.CoordinateMultipliply(offset).ToIntegerSize();
+            }
+            else
+            {
+                shape.Position += offset;
             }
         }
 
@@ -84,27 +90,30 @@ namespace Vedit.App
             return keyPoints.FirstOrDefault(keyPoint => keyPoint.ContainsPoint(parent, point));
         }
 
+        public void RemoveShape(IShape shape)
+        {
+            document.Shapes.Remove(shape);
+            selectedShapes.RemoveWhere(s => s.shape == shape);
+        }
+
         public ClickContext FindShape(Vector point)
         {
             foreach (var selected in selectedShapes.Reverse())
             {
                 var keyPoint = FindKeyPoint(selected, selected.CreatePoints(selected.shape.Position), point);
                 if (keyPoint != null)
-                {
                     return new ClickContext(selected.shape, keyPoint);
-                }
             }
-                
             return new ClickContext(Document.FindShape(point), null);
         }
 
-        public void FixSize(IShape shape)
+        public void InvertNegativeSize(IShape shape)
         {
             if (shape.BoundingRectSize.Width < 0)
                 shape.Position += new Vector(shape.BoundingRectSize.Width, 0);
             if (shape.BoundingRectSize.Height < 0)
                 shape.Position += new Vector(0, shape.BoundingRectSize.Height);
-            shape.BoundingRectSize = new Size(Math.Abs(shape.BoundingRectSize.Width), Math.Abs(shape.BoundingRectSize.Height));
+            shape.BoundingRectSize = shape.BoundingRectSize.Abs();
         }
     }
 }

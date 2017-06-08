@@ -83,6 +83,7 @@
     <Compile Include="Infrastructure\GraphicsExtensions.cs" />
     <Compile Include="Infrastructure\ImageSettings.cs" />
     <Compile Include="Infrastructure\Serialization\SerializationExtensions.cs" />
+    <Compile Include="Infrastructure\SizeExtension.cs" />
     <Compile Include="Infrastructure\VectorExtensions.cs" />
     <Compile Include="UI\Gui.cs">
       <SubType>Form</SubType>
