@@ -21,10 +21,10 @@ namespace Vedit.App
         public List<KeyPoint> CreatePoints(Vector offset)
         {
             var points = new List<KeyPoint>();
-            for (int x = 0; x <= 2; x++)
-                for (int y = 0; y <= 2; y++)
+            for (var x = 0; x <= 2; x++)
+                for (var y = 0; y <= 2; y++)
                 {
-                    if (x == 1 && y == 1)
+                    if (x != 0 && y != 0 && x != 2 && y != 2)
                         continue;
                     var positionVector = new Vector(Convert.ToInt32(x == 0), Convert.ToInt32(y == 0));
                     var sizeVector = new Vector(Convert.ToInt32(x == 2), Convert.ToInt32(y == 2));
@@ -33,7 +33,8 @@ namespace Vedit.App
                     if (positionVector.Y == 1)
                         sizeVector = new Vector(sizeVector.X, -1);
                     var point = new KeyPoint(positionVector, sizeVector);
-                    point.Position = offset + new Vector(x * shape.BoundingRectSize.Width / 2, y * shape.BoundingRectSize.Height / 2);
+                    var offsetToPointCenter = point.BoundingRectSize.OffsetToCenter();
+                    point.Position = offset + new Vector(x, y).CoordinateMultipliply(shape.BoundingRectSize.OffsetToCenter()) - offsetToPointCenter;
                     points.Add(point);
                 }
             return points;
@@ -51,11 +52,11 @@ namespace Vedit.App
         
         protected override void PaintStraight(Graphics graphics)
         {
-            foreach (var point in CreatePoints(Vector.Zero))
-                point.Paint(graphics);
             var frame = new SelectionFrame();
             frame.BoundingRectSize = shape.BoundingRectSize;
             frame.Paint(graphics);
+            foreach (var point in CreatePoints(Vector.Zero))
+                point.Paint(graphics);
         }
     }
 }
