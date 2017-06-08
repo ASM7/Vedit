@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using Vedit.Domain;
 using Vedit.Domain.SelectionPrimitives;
 using Vedit.Domain.Shapes;
@@ -51,13 +52,13 @@ namespace Vedit.App
 
         public void ClearSelection()
         {
-            selectedShapes = new HashSet<SelectedShape>();
+            selectedShapes.Clear();
         }
 
         public void InteractWithShape(ClickContext clickContext, Vector offset)
         {
             var shape = clickContext.Shape;
-            var selected = TryFindSelectedShape(shape);
+            var selected = FindSelectedShape(shape);
             if (selected == null)
             {
                 shape.Position += offset;
@@ -77,24 +78,14 @@ namespace Vedit.App
             }
         }
 
-        private SelectedShape TryFindSelectedShape(IShape shape)
+        private SelectedShape FindSelectedShape(IShape shape)
         {
-            foreach (var selectedShape in selectedShapes)
-                if (selectedShape.shape == shape)
-                    return selectedShape;
-            return null;
+            return selectedShapes.FirstOrDefault(selectedShape => selectedShape.shape == shape);
         }
 
         private KeyPoint FindKeyPoint(IEnumerable<KeyPoint> keyPoints, Vector point)
         {
-            foreach (var keyPoint in keyPoints)
-            {
-                if (keyPoint.ContainsPoint(point))
-                {
-                    return keyPoint;
-                }
-            }   
-            return null;
+            return keyPoints.FirstOrDefault(keyPoint => keyPoint.ContainsPoint(point));
         }
 
         public ClickContext FindShape(Vector point)
