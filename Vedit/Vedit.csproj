@@ -60,11 +60,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\ClickContext.cs" />
-    <Compile Include="App\IPainter.cs" />
-    <Compile Include="App\Painter.cs" />
     <Compile Include="App\SelectedShape.cs" />
     <Compile Include="Domain\DocumentSerialization\BinaryDocumentSerializer.cs" />
     <Compile Include="Domain\DocumentSerialization\BitmapRenderer.cs" />
+    <Compile Include="Domain\IPainter.cs" />
+    <Compile Include="Domain\Painter.cs" />
     <Compile Include="Domain\SelectionPrimitives\ISelectionPrimitive.cs" />
     <Compile Include="Domain\SelectionPrimitives\KeyPoint.cs" />
     <Compile Include="Domain\SelectionPrimitives\SelectionFrame.cs" />
