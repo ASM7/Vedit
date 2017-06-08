@@ -60,6 +60,11 @@ namespace Vedit.Infrastructure
             return a*k;
         }
 
+        public static double operator *(Vector a, Vector b)
+        {
+            return a.X*b.X + a.Y * b.Y;
+        }
+
         public static Vector operator +(Vector a, Vector b)
         {
             return new Vector(a.X + b.X, a.Y + b.Y);
