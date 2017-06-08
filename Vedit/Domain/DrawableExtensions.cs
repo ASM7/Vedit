@@ -7,10 +7,15 @@ namespace Vedit.Domain
     {
         public static bool ContainsPoint(this IDrawable drawable, Vector point)
         {
+            return drawable.ContainsPoint(drawable, point);
+        }
+
+        public static bool ContainsPoint(this IDrawable drawable, IDrawable parentDrawable, Vector point)
+        {
             var rect = new Rectangle(drawable.Position.ToDrawingPoint(), drawable.BoundingRectSize);
-            var center = drawable.Position +
-                         0.5 * new Vector(drawable.BoundingRectSize.Width, drawable.BoundingRectSize.Height);
-            return rect.Contains(point.Rotate(center, -drawable.Angle.ToRadians()).ToDrawingPoint());
+            var center = parentDrawable.Position +
+                         0.5 * new Vector(parentDrawable.BoundingRectSize.Width, parentDrawable.BoundingRectSize.Height);
+            return rect.Contains(point.Rotate(center, -parentDrawable.Angle.ToRadians()).ToDrawingPoint());
         }
     }
 }

@@ -42,6 +42,7 @@ namespace Vedit.App
 
         public void SelectShape(IShape shape)
         {
+            ClearSelection();
             selectedShapes.Add(new SelectedShape(shape));
         }
 
@@ -78,16 +79,16 @@ namespace Vedit.App
             return selectedShapes.FirstOrDefault(selectedShape => selectedShape.shape == shape);
         }
 
-        private KeyPoint FindKeyPoint(IEnumerable<KeyPoint> keyPoints, Vector point)
+        private KeyPoint FindKeyPoint(IDrawable parent, IEnumerable<KeyPoint> keyPoints, Vector point)
         {
-            return keyPoints.FirstOrDefault(keyPoint => keyPoint.ContainsPoint(point));
+            return keyPoints.FirstOrDefault(keyPoint => keyPoint.ContainsPoint(parent, point));
         }
 
         public ClickContext FindShape(Vector point)
         {
             foreach (var selected in selectedShapes.Reverse())
             {
-                var keyPoint = FindKeyPoint(selected.CreatePoints(selected.shape.Position), point);
+                var keyPoint = FindKeyPoint(selected, selected.CreatePoints(selected.shape.Position), point);
                 if (keyPoint != null)
                 {
                     return new ClickContext(selected.shape, keyPoint);
