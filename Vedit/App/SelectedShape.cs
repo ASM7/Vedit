@@ -40,12 +40,17 @@ namespace Vedit.App
         }
 
         public readonly IShape shape;
-        
-        protected override void PaintStraight(Graphics graphics)
+
+        public override void Paint(Bitmap bitmap)
         {
             Angle = shape.Angle;
             Position = shape.Position;
             BoundingRectSize = shape.BoundingRectSize;
+            base.Paint(bitmap);
+        }
+        
+        protected override void PaintStraight(Graphics graphics)
+        {
             foreach (var point in CreatePoints(Vector.Zero))
                 point.Paint(graphics);
             var frame = new SelectionFrame();

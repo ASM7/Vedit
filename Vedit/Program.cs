@@ -26,10 +26,10 @@ namespace Vedit
         static IClient ClientInit()
         {
             var kernel = new StandardKernel();
-            kernel.Bind<IClient>().To<Gui>().InSingletonScope();
+            kernel.Bind<IClient>().To<Gui>();
             kernel.Bind<Editor>().ToSelf().InSingletonScope();
             kernel.Bind<IPainter>().To<Painter>();
-            kernel.Bind<ImageSettings>().ToConstant(new ImageSettings {Width = 500, Height = 500}).InSingletonScope();
+            kernel.Bind<ImageSettings>().ToConstant(new ImageSettings {Width = 500, Height = 500});
             kernel.Bind(c => c.FromThisAssembly()
                 .SelectAllClasses()
                 .InheritedFromAny(typeof(IMenuAction), typeof(ISerializer<Document>), typeof(IDeserializer<Document>))
