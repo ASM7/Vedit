@@ -63,7 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\ClickContext.cs" />
-    <Compile Include="App\SelectedShape.cs" />
+    <Compile Include="App\ShapeSelection.cs" />
     <Compile Include="Domain\DocumentSerialization\BinaryDocumentSerializer.cs" />
     <Compile Include="Domain\DocumentSerialization\BitmapRenderer.cs" />
     <Compile Include="Domain\IPainter.cs" />

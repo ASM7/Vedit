@@ -11,9 +11,9 @@ using Vedit.Infrastructure;
 
 namespace Vedit.App
 {
-    class SelectedShape : DrawableObject
+    class ShapeSelection : DrawableObject
     {
-        public SelectedShape(IShape shape)
+        public ShapeSelection(IShape shape)
         {
             this.shape = shape;
         }
