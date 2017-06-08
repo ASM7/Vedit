@@ -89,7 +89,6 @@
     <Compile Include="App\IEditor.cs" />
     <Compile Include="Domain\Shapes\Ellipse.cs" />
     <Compile Include="Domain\Shapes\Segment.cs" />
-    <Compile Include="Infrastructure\ICanvas.cs" />
     <Compile Include="Domain\Shapes\IShape.cs" />
     <Compile Include="Infrastructure\Serialization\IObjectFileReader.cs" />
     <Compile Include="Infrastructure\Serialization\IObjectFileWriter.cs" />
