@@ -6,7 +6,7 @@ namespace Vedit.Domain
     public interface IDrawable
     {
         Vector Position { get; set; }
-        Size BoundingRectSize { get; set; }
+        SizeF BoundingRectSize { get; set; }
         float Angle { get; set; }
 
         void Paint(Bitmap bitmap);

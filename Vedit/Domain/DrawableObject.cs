@@ -8,7 +8,7 @@ namespace Vedit.Domain
     public abstract class DrawableObject : IDrawable
     {
         public Vector Position { get; set; } = Vector.Zero;
-        public Size BoundingRectSize { get; set; } = new Size(100, 100);
+        public SizeF BoundingRectSize { get; set; } = new Size(100, 100);
         public float Angle { get; set; }
 
         public virtual void Paint(Bitmap bitmap)

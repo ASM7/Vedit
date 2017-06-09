@@ -26,13 +26,12 @@ namespace Vedit.App
                 {
                     if (x != 0 && y != 0 && x != 2 && y != 2)
                         continue;
-                    var positionVector = new Vector(Convert.ToInt32(x == 0), Convert.ToInt32(y == 0));
-                    var sizeVector = new Vector(Convert.ToInt32(x == 2), Convert.ToInt32(y == 2));
-                    if (positionVector.X == 1)
+                    var sizeVector = new Vector(x == 2 ? 1 : 0, y == 2 ? 1 : 0);
+                    if (x == 0)
                         sizeVector = new Vector(-1, sizeVector.Y);
-                    if (positionVector.Y == 1)
+                    if (y == 0)
                         sizeVector = new Vector(sizeVector.X, -1);
-                    var point = new KeyPoint(positionVector, sizeVector);
+                    var point = new KeyPoint(sizeVector);
                     var offsetToPointCenter = point.BoundingRectSize.OffsetToCenter();
                     point.Position = offset + new Vector(x, y).CoordinateMultiply(shape.BoundingRectSize.OffsetToCenter()) - offsetToPointCenter;
                     points.Add(point);

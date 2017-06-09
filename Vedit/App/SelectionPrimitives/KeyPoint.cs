@@ -7,14 +7,12 @@ namespace Vedit.App.SelectionPrimitives
 {
     public class KeyPoint : DrawableObject, ISelectionPrimitive
     {
-        public readonly Vector OffsetPositionVector;
-        public readonly Vector OffsetSizeVector;
+        public readonly Vector SizeImpact;
 
-        public KeyPoint(Vector offsetPositionVector, Vector offsetSizeVector)
+        public KeyPoint(Vector sizeImpact)
         {
             BoundingRectSize = new Size(10, 10);
-            OffsetPositionVector = offsetPositionVector;
-            OffsetSizeVector = offsetSizeVector;
+            SizeImpact = sizeImpact;
         }
 
         protected override void PaintStraight(Graphics graphics)

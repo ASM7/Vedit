@@ -10,9 +10,9 @@ namespace Vedit.Infrastructure
             return new Point((int)vector.X, (int)vector.Y);
         }
 
-        public static Size ToIntegerSize(this Vector vector)
+        public static SizeF ToSizeF(this Vector vector)
         {
-            return new Size((int)vector.X, (int)vector.Y);
+            return new SizeF((float)vector.X, (float)vector.Y);
         }
 
         public static Vector CoordinateMultiply(this Vector v1, Vector v2)

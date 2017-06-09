@@ -71,8 +71,10 @@ namespace Vedit.App
             var startPoint = clickContext.KeyPoint;
             if (startPoint != null)
             {
-                shape.Position += startPoint.OffsetPositionVector.CoordinateMultiply(offset);
-                shape.BoundingRectSize += startPoint.OffsetSizeVector.CoordinateMultiply(offset).ToIntegerSize();
+                var newSize = CalcNewSize(startPoint.SizeImpact, shape, offset);
+                var newPosition = CalcNewPosition(startPoint.SizeImpact, shape, newSize, offset);
+                shape.BoundingRectSize = newSize;
+                shape.Position = newPosition;
             }
             else
             {
@@ -114,6 +116,26 @@ namespace Vedit.App
             if (shape.BoundingRectSize.Height < 0)
                 shape.Position += new Vector(0, shape.BoundingRectSize.Height);
             shape.BoundingRectSize = shape.BoundingRectSize.Abs();
+        }
+
+        public static SizeF CalcNewSize(Vector sizeImpact, IShape oldShape, Vector offset)
+        {
+            var rotatedOffset = offset.Rotate(Vector.Zero, -oldShape.Angle.ToRadians());
+            return oldShape.BoundingRectSize + sizeImpact.CoordinateMultiply(rotatedOffset).ToSizeF();
+        }
+
+        public static Vector CalcNewPosition(Vector sizeImpact, IShape oldShape, SizeF newSize, Vector offset)
+        {
+            var sizeImpactAbs = new Vector(
+                Math.Abs(sizeImpact.X),
+                Math.Abs(sizeImpact.Y));
+            var limitedOffset = offset
+                .Rotate(Vector.Zero, -oldShape.Angle.ToRadians())
+                .CoordinateMultiply(sizeImpactAbs)
+                .Rotate(Vector.Zero, oldShape.Angle.ToRadians());
+            var currentCenter = oldShape.Position + oldShape.BoundingRectSize.OffsetToCenter();
+            var newCenter = currentCenter + 0.5 * limitedOffset;
+            return newCenter - newSize.OffsetToCenter();
         }
     }
 }
