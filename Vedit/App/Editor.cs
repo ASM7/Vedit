@@ -32,9 +32,9 @@ namespace Vedit.App
             selectedShapes = new HashSet<ShapeSelection>();
         }
 
-        public Bitmap Draw(ImageSettings settings)
+        public Bitmap Draw()
         {
-            var bitmap = new Bitmap(settings.Width, settings.Height);
+            var bitmap = new Bitmap(Document.ImageSettings.Width, Document.ImageSettings.Height);
             painter.Draw(bitmap, Document.Shapes);
             painter.Draw(bitmap, selectedShapes);
             return bitmap;

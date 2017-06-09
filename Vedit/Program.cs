@@ -30,6 +30,7 @@ namespace Vedit
             kernel.Bind<Editor>().ToSelf().InSingletonScope();
             kernel.Bind<IPainter>().To<Painter>();
             kernel.Bind<ImageSettings>().ToConstant(new ImageSettings {Width = 500, Height = 500});
+            kernel.Bind<ToolPanelSettings>().ToConstant(new ToolPanelSettings {ColumnCount = 1});
             kernel.Bind(c => c.FromThisAssembly()
                 .SelectAllClasses()
                 .InheritedFromAny(typeof(IMenuAction), typeof(ISerializer<Document>), typeof(IDeserializer<Document>))

@@ -13,17 +13,15 @@ namespace Vedit.UI
     {
         private readonly Editor editor;
         private readonly PictureBox picture;
-        private readonly ImageSettings imageSettings;
         private readonly PropertyGrid propertiesPanel;
         private Vector mousePoint;
 
-        public Gui(Editor editor, ToolPanel toolPanel, ImageSettings imageSettings, IMenuAction[] menuActions)
+        public Gui(Editor editor, ToolPanel toolPanel,IMenuAction[] menuActions)
         {
             this.editor = editor;
-            this.imageSettings = imageSettings;
             InitializeComponent();
             var menu = CreateMenu(menuActions.ToMenuItems());
-            picture = CreatePictureBox(editor.Draw(imageSettings));
+            picture = CreatePictureBox(editor.Draw());
             toolPanel.AddActionOnClick(RedrawPicture);
             propertiesPanel = CreatePropertyPanel();
             var layoutPanel = CreateLayoutPanel(new Control[] {toolPanel, picture, propertiesPanel});
@@ -93,7 +91,7 @@ namespace Vedit.UI
 
         void RedrawPicture()
         {
-            picture.Image = editor.Draw(imageSettings);
+            picture.Image = editor.Draw();
         }
 
         private ClickContext currentClickContext;
@@ -132,11 +130,6 @@ namespace Vedit.UI
         void OnCanvasMouseClick(object sender, MouseEventArgs e)
         {
             Refresh();           
-        }
-
-        Bitmap GetOriginalImage()
-        {
-            return editor.Draw(imageSettings);
         }
 
         public void Run()
